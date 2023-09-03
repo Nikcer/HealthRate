@@ -1,0 +1,32 @@
+{
+  "name": "healthrate-server",
+  "version": "1.0.0",
+  "description": "healthrate backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nikcer/HealthRate.git#master"
+  },
+  "author": "Nicolò Cerra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Nikcer/HealthRate/issues"
+  },
+  "homepage": "https://github.com/Nikcer/HealthRate/tree/master#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.0",
+    "morgan": "^1.10.0",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
