@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -10,7 +11,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minLenght: 8,
+    minlenght: 8,
   },
   username: {
     type: String,
@@ -27,7 +28,7 @@ userSchema.statics.signup = async function (email, password, username) {
     throw new Error(" L' Email è già in uso");
   }
 
-  if (email || password || username) {
+  if (!email || !password || !username) {
     throw new Error("I campi sono obbligatori");
   }
 
@@ -60,19 +61,22 @@ userSchema.statics.login = async function (email, password) {
 
   const user = await this.findOne({ email });
 
-  if (!user) throw new Error("Email o password non corretti");
+  if (!user) throw new Error("Email non corretta");
 
-  const match = await bcrypt.compare(password, user.password);
+  const storePasswordHash = user.password;
+
+  const match = await bcrypt.compare(password, storePasswordHash);
 
   if (!match) throw new Error("Password non corretta");
 
   return user;
 };
 
-userSchema.statics.updateUser = async function (email, username) {
+userSchema.statics.updateUser = async function (id, email, username) {
   const user = await this.updateOne({ _id: id }, { email, username });
 
-  return user;
+  const updatedUser = await this.findById(id).select("-password");
+  return updatedUser;
 };
 
 userSchema.statics.updatePassword = async function (id, password) {
@@ -85,6 +89,12 @@ userSchema.statics.updatePassword = async function (id, password) {
   const hash = await bcrypt.hash(password, 10);
 
   const user = await this.updateOne({ _id: id }, { password: hash });
+
+  return user;
+};
+
+const deleteUser = async function (email, username) {
+  const user = await this.deleteOne({ _id: id }, { email, username });
 
   return user;
 };
