@@ -11,4 +11,5 @@ router.patch("/:id/changepassword", usersController.updateUserPassword);
 router.delete("/:id", usersController.deleteUser);
 router.get("/", usersController.getAllUsers);
 router.get("/:id", usersController.getUserProfile);
+
 module.exports = router;
