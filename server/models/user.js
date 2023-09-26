@@ -82,7 +82,7 @@ userSchema.statics.updateUser = async function (id, email, username) {
 userSchema.statics.updatePassword = async function (id, password) {
   if (!validator.isStrongPassword(password)) {
     throw new Error(
-      "Password non valida: inserire almeno 8 caratteri con almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale"
+      "Password non valida: inserire almeno 8 caratteri con almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale"
     );
   }
 

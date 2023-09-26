@@ -38,12 +38,15 @@ const getRatingsByUser = async (req, res) => {
   try {
     const user = await User.findById(id);
     if (!user) {
-      res.status(400).json({ error: "Utente non trovato" });
+      res.status(404).json({ message: "Utente non trovato" });
     }
-    const ratings = await Rating.find({ user: id });
+    const ratings = await Rating.find({ user: id }).populate({
+      path: "healthCenter",
+      select: "nome",
+    });
     res.status(200).json({ user, ratings });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 

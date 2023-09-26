@@ -80,6 +80,35 @@ const getHealtCenterData = async (req, res) => {
   }
 };
 
+const searchHealthCenters = async (req, res) => {
+  const { nome, citta, provincia, regione } = req.query;
+
+  const searchQuery = {};
+
+  if (nome) {
+    searchQuery.nome = new RegExp(nome, "i");
+  }
+
+  if (citta) {
+    searchQuery.citta = new RegExp(citta, "i");
+  }
+
+  if (regione) {
+    searchQuery.regione = new RegExp(regione, "i");
+  }
+
+  if (provincia) {
+    searchQuery.provincia = new RegExp(provincia, "i");
+  }
+
+  try {
+    const healthCenters = await HealthCenter.find(searchQuery);
+    res.json(healthCenters);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const deleteHealthCenter = async (req, res) => {
   try {
     const { id } = req.params;
@@ -95,5 +124,6 @@ module.exports = {
   updateHealthCenter,
   getAllHealthCenters,
   getHealtCenterData,
+  searchHealthCenters,
   deleteHealthCenter,
 };

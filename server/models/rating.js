@@ -11,17 +11,21 @@ const ratingSchema = new mongoose.Schema({
     ref: "HealthCenter",
     required: true,
   },
+  healthCenterName: {
+    type: String,
+  },
   test: {
     type: String,
     required: true,
   },
   interval: {
-    type: Number,
+    type: String,
     required: true,
   },
   comment: {
     type: String,
   },
+  inputDate: { type: Date, default: Date.now },
 });
 
 const Rating = mongoose.model("Rating", ratingSchema);

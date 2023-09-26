@@ -19,7 +19,6 @@ const loginUser = async (req, res) => {
     res.status(200).json({ email, id, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
-    console.log(password);
   }
 };
 
@@ -65,10 +64,11 @@ const getAllUsers = async (req, res) => {
 //Update user profile
 
 const updateUserProfile = async (req, res) => {
+  const { id } = req.params;
+  const { email } = req.body;
+
   try {
-    const { id } = req.params;
-    const { email, username } = req.body;
-    const user = await User.updateUser(id, email, username);
+    const user = await User.updateUser(id, email);
     res.status(200).json({ message: "Profilo aggiornato correttamente", user });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -77,9 +77,9 @@ const updateUserProfile = async (req, res) => {
 //Update user password
 
 const updateUserPassword = async (req, res) => {
+  const { id } = req.params;
+  const { password } = req.body;
   try {
-    const { id } = req.params;
-    const { password } = req.body;
     const newPassword = await User.updatePassword(id, password);
     res.status(200).json({ message: "Password aggiornata correttamente" });
   } catch (error) {
@@ -90,8 +90,8 @@ const updateUserPassword = async (req, res) => {
 //Delete user
 
 const deleteUser = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const user = await User.findByIdAndDelete(id);
     res.status(200).json({ message: "Utente eliminato correttamente" });
   } catch (error) {
