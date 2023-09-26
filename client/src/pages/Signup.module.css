@@ -1,0 +1,20 @@
+section {
+  display: flex;
+  align-items: center;
+}
+
+.formContainer {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  height: 25rem;
+}
+
+.emailContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+h5 {
+  color: red;
+}

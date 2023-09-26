@@ -1,0 +1,16 @@
+.formContainer {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  height: 10rem;
+  justify-content: space-between;
+}
+
+.emailContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+h5 {
+  color: red;
+}

@@ -1,0 +1,9 @@
+.clinicform {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+}

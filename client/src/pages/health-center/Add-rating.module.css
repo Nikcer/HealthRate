@@ -1,0 +1,7 @@
+.addRatingContainer {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  width: 100%;
+  padding: 3rem;
+}

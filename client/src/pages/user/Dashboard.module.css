@@ -1,0 +1,9 @@
+.dashboardContainer {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* .resultsContainer {
+  display: block;
+  flex-direction: column;
+} */

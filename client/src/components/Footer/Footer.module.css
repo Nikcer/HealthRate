@@ -1,0 +1,26 @@
+.footer {
+  width: 100%;
+  padding-top: 1rem;
+  flex-direction: column;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 15vh;
+  margin-top: auto;
+  background-color: rgb(248, 249, 250);
+}
+p {
+  font-size: 18px;
+  padding: 2px;
+}
+
+.icons {
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+}
+
+.icons a {
+  margin: 10px;
+}
