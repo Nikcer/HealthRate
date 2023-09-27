@@ -31,7 +31,7 @@ function Addclinic() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/healthcenter",
+        `${process.env.REACT_APP_API_URL}/api/healthcenter`,
         {
           nome: nome,
           indirizzo: indirizzo,
@@ -177,8 +177,13 @@ function Addclinic() {
               Lascia Recensione
             </NavLink>
           </Button>
-          {success && <p> {success}</p>}
-          {error && <p className="text-danger">Errore: {error}</p>}
+          <div className="pt-5">
+            {success ? (
+              <p>{success} </p>
+            ) : (
+              <p className="text-danger">{error}</p>
+            )}
+          </div>
         </div>
       </Form>
     </div>

@@ -13,7 +13,7 @@ function UpdateUser(user) {
   const { auth } = useAuth();
   const { userData } = useUserData();
 
-  const [newEmail, setNewEmail] = useState();
+  const [newEmail, setNewEmail] = useState("");
   const [confirmNewEmail, setConfirmNewEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ function UpdateUser(user) {
 
     try {
       const response = await axios.patch(
-        `http://localhost:8000/api/users/${userData.id}`,
+        `${process.env.REACT_APP_API_URL}/api/users/${userData.id}`,
         {
           email: newEmail,
         },

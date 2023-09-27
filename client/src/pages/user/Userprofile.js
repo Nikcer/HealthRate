@@ -43,7 +43,7 @@ function Profilo() {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/users/${userData.id}`,
+          `${process.env.REACT_APP_API_URL}/api/users/${userData.id}`,
           {
             headers: {
               Authorization: `${auth.user}`,

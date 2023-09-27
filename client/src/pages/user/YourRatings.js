@@ -8,13 +8,14 @@ function YourRatings() {
   const { userData } = useUserData();
   const { auth } = useAuth();
   const [yourRatings, setYourRatings] = useState();
-  const [error, setError] = useState();
-  console.log("user", userData);
+  const [error, setError] = useState([]);
+  console.log("userData: ", userData);
+
   useEffect(() => {
     const fetchYourRatings = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/rating/user/${userData.id}`,
+          `${process.env.REACT_APP_API_URL}/api/rating/user/${userData.id}`,
           {
             headers: {
               Authorization: auth.user,
@@ -26,6 +27,7 @@ function YourRatings() {
         const data = await response.data;
 
         setYourRatings(data);
+
         console.log(yourRatings);
       } catch (error) {
         setError(error);
@@ -72,9 +74,10 @@ function YourRatings() {
           </div>
         </div>
       ) : (
-        "Caricamento..."
+        "Caricamento..." || (
+          <div>{error && <p className="text-danger">Errore: {error}</p>}</div>
+        )
       )}
-      <div>{error && <p className="text-danger">Errore: {error}</p>}</div>
     </div>
   );
 }

@@ -29,7 +29,7 @@ function Addrating() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/rating",
+        `${process.env.REACT_APP_API_URL}/api/rating`,
         {
           user: userData.id,
           healthCenter: resultId,
@@ -43,6 +43,7 @@ function Addrating() {
           },
         }
       );
+      console.log(response);
       console.log("resultID: ", resultId);
       console.log("User Id", useUserData);
       setSuccess("Recensione aggiunta con successo");
@@ -56,20 +57,20 @@ function Addrating() {
     const fetchClinicName = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/rating/healtcenter/${resultId}`
+          `${process.env.REACT_APP_API_URL}/api/rating/healtcenter/${resultId}`
         );
         console.log("Nome clinica", response.data.healthCenter.nome);
         setName(response.data.healthCenter.nome);
       } catch (error) {
-        setErrorName("Errore :", error);
+        setErrorName("Errore: ", error);
       }
     };
     fetchClinicName();
-  }, []);
+  }, [resultId]);
 
   return (
     <div className={styles.addRatingContainer}>
-      <h1 className="p-3">Clinica: {name ? name : error}</h1>
+      <h1 className="p-3">Clinica: {name ? name : errorName}</h1>
       <h3 className="p-3">Aggiungi recensione</h3>
       <Form onSubmit={handleAddRating}>
         <Row className="mb-3">
@@ -124,8 +125,9 @@ function Addrating() {
         </Row>
         <Form.Group className="mb-3"></Form.Group>
       </Form>
-      {success && <p> {success}</p>}
-      {error && <p className="text-danger">Errore: {error}</p>}
+      <div className="pt-5 pb-3">
+        {success ? <p>{success} </p> : <p className="text-danger">{error}</p>}
+      </div>
     </div>
   );
 }

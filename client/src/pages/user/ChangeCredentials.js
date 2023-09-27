@@ -27,7 +27,7 @@ const ChangeCredentials = (password) => {
 
     try {
       const response = await axios.patch(
-        `http://localhost:8000/api/users/${userData.id}/password`,
+        `${process.env.REACT_APP_API_URL}/api/users/${userData.id}/password`,
         {
           password: newPassword,
         },

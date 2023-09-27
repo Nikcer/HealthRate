@@ -40,7 +40,7 @@ function Dashboard() {
     }
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/healthcenter?nome=${query.nome}&citta=${query.citta}&provincia=${query.provincia}&regione=${query.regione}`
+        `${process.env.REACT_APP_API_URL}/api/healthcenter?nome=${query.nome}&citta=${query.citta}&provincia=${query.provincia}&regione=${query.regione}`
       );
 
       const data = await response.data;
