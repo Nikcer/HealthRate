@@ -22,7 +22,7 @@ const Navbr = () => {
       <Container>
         <Navbar.Brand className="ps-1">
           <NavLink to="/" className={styles.navlink}>
-            <h1>Health Rate</h1>
+            <h1>HealthRate</h1>
           </NavLink>
         </Navbar.Brand>
 
