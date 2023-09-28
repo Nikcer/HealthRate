@@ -8,6 +8,7 @@ import Card from "react-bootstrap/Card";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthProvider";
 import styles from "./Dashboard.module.css";
 
 function Dashboard() {
@@ -17,7 +18,7 @@ function Dashboard() {
     provincia: "",
     regione: "",
   });
-
+  const { logout } = useAuth();
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
 
@@ -56,6 +57,13 @@ function Dashboard() {
   };
   const handleAddReview = (resultId) => {
     navigate(`/addrating/${resultId}`);
+  };
+
+  const handleLogout = () => {
+    logout();
+    console.log(logout);
+
+    navigate("/login");
   };
 
   return (
@@ -100,7 +108,7 @@ function Dashboard() {
               </Button>
             </Row>
             <Row md={1}>
-              <Button size="md" className="border">
+              <Button size="md" className="border" onClick={handleLogout}>
                 Esci
               </Button>
             </Row>
