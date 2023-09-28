@@ -1,6 +1,6 @@
 const supertest = require("supertest");
 const app = require("../app");
-const { connectDB } = require("../database"); // Importa correttamente il modulo database
+const connectDB = require("../database"); // Importa correttamente il modulo database
 
 describe("App", () => {
   before(async () => {
