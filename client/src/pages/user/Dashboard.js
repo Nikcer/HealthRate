@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import styles from "./Dashboard.module.css";
-
+import Loader from "../../components/Loader/Loader";
 function Dashboard() {
   const [query, setQuery] = useState({
     nome: "",
@@ -21,7 +21,7 @@ function Dashboard() {
   const { logout } = useAuth();
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -31,6 +31,7 @@ function Dashboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (results.length < 1) {
       setError("Nessuna clinica trovata secondo i parametri inseriti");
@@ -46,8 +47,8 @@ function Dashboard() {
 
       const data = await response.data;
       console.log(response);
-
       setResults(data);
+      setIsLoading(false);
       console.log(results);
     } catch (error) {
       setError("Nessuna clinica trovata secondo i parametri inseriti");
@@ -68,7 +69,7 @@ function Dashboard() {
 
   return (
     <Container className={styles.dashboardContainer}>
-      <Row className="p-4">
+      <Row className="p-4 gx-5">
         <Col md={3} className="pb-1">
           <div className="pb-5">
             <h1>Menù</h1>
@@ -115,8 +116,8 @@ function Dashboard() {
           </div>
         </Col>
 
-        <Col md={9} className={styles.searchContainer}>
-          <div>
+        <Col md={8} className={styles.searchContainer}>
+          <div className="border border-primary-subtle p-2 mb-2 rounded border-3">
             <h3 className="pt-4 ">Cerca clinica</h3>
             <Form onSubmit={handleSubmit} className="pb-5">
               <Row className="mb-3">
@@ -171,41 +172,45 @@ function Dashboard() {
       </Row>
 
       <div className={styles.resultsContainer}>
-        <Col className="b-0">
-          {results.length > 0 && <h2>Risultati:</h2>}
-          <div>
-            {results.length > 0 ? (
-              results.map((result) => (
-                <div
-                  key={result._id}
-                  className="border border-danger-subtle  mb-2 rounded border-3"
-                >
-                  <Card.Title>
-                    {result.nome} - {result.citta} - {result.regione}
-                  </Card.Title>
-
-                  <NavLink
-                    className="p-2"
-                    onClick={() => handleAddReview(result._id)}
-                    to={`/addrating/${result._id}`}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Col className="b-0">
+            {results.length > 0 && <h2>Risultati:</h2>}
+            <div>
+              {results.length > 0 ? (
+                results.map((result) => (
+                  <div
+                    key={result._id}
+                    className="border border-danger-subtle  mb-2 rounded border-3"
                   >
-                    Aggiungi Recensione
-                  </NavLink>
+                    <Card.Title>
+                      {result.nome} - {result.citta} - {result.regione}
+                    </Card.Title>
 
-                  <NavLink
-                    className="p-2"
-                    onClick={() => handleAddReview(result._id)}
-                    to={`/clinicform/${result._id}`}
-                  >
-                    Visualizza Recensioni
-                  </NavLink>
-                </div>
-              ))
-            ) : (
-              <p>{error}</p>
-            )}
-          </div>
-        </Col>
+                    <NavLink
+                      className="p-2"
+                      onClick={() => handleAddReview(result._id)}
+                      to={`/addrating/${result._id}`}
+                    >
+                      Aggiungi Recensione
+                    </NavLink>
+
+                    <NavLink
+                      className="p-2"
+                      onClick={() => handleAddReview(result._id)}
+                      to={`/clinicform/${result._id}`}
+                    >
+                      Visualizza Recensioni
+                    </NavLink>
+                  </div>
+                ))
+              ) : (
+                <h3 className="text-danger pt-3">{error}</h3>
+              )}
+            </div>
+          </Col>
+        )}
       </div>
     </Container>
   );

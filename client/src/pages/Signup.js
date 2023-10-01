@@ -41,16 +41,21 @@ function Signup() {
       console.log("Registrazione avvenuta con successo", response);
 
       navigate("/login");
-    } catch (err) {
-      console.log("Errore durante la registrazione", err.response.data);
-      if (err.response.data.error.includes("duplicate key error")) {
+    } catch (error) {
+      const errorMessage = error.response
+        ? error.response.data.error
+        : "Unknown error";
+      console.log("Errore durante la registrazione", error.response.data);
+      if (errorMessage.includes("duplicate key error")) {
         setEmpityFields("");
         setErrorMessage("Username già esistente");
         return;
-      } else if (err.response.data.error.includes("Email")) {
+      } else if (errorMessage.includes("Email")) {
         setEmpityFields("");
         setErrorMessage("Email già esistente");
         return;
+      } else {
+        setErrorMessage("Errore durante la registrazione: " + errorMessage);
       }
     }
   };

@@ -8,13 +8,14 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Loader from "../../components/Loader/Loader";
 function Profilo() {
   const { auth, logout } = useAuth();
   const { userData } = useUserData();
   const [profile, setProfile] = useState([]);
   const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
   const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleDeleteUser = (e) => {
@@ -54,6 +55,7 @@ function Profilo() {
         console.log("Response:", response);
         const data = await response.data;
         console.log("data", data);
+        setIsLoading(false);
         setProfile(data);
         console.log("Profilo: ", profile);
       } catch (error) {
@@ -69,53 +71,59 @@ function Profilo() {
 
   return (
     <Container className={styles.userProfileContainer}>
-      <div className="">
-        <Col className="pb-1">
-          <div xs={2} md={1} className="pt-2 d-grid gap-3  mx-auto">
-            <h1>Profilo Utente</h1>
-            {auth.isAuthenticated ? (
-              <div>
-                <p>Benvenuto: {profile.username}</p>
-                <div className="text-center w50">
-                  <p>La tua Email:</p>
-                  <p>{profile.email}</p>
-                </div>
-                <div className="text-center w50">
-                  <p>Il tuo id:</p>
-                  <p>{profile._id}</p>
-                </div>
-
-                {isDeleteConfirmed ? (
-                  <div>
-                    <p>Sei sicuro di voler eliminare l'utente?</p>
-                    <Button variant="danger" onClick={handleDeleteUser}>
-                      Sì
-                    </Button>
-                    <Button
-                      variant="secondary"
-                      onClick={() => setIsDeleteConfirmed(false)}
-                    >
-                      No
-                    </Button>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="">
+          <Col className="pb-1">
+            <div xs={2} md={1} className="pt-2 d-grid gap-3  mx-auto">
+              <h1>Profilo Utente</h1>
+              {auth.isAuthenticated ? (
+                <div>
+                  <p>Benvenuto: {profile.username}</p>
+                  <div className="text-center w50">
+                    <p>La tua Email:</p>
+                    <p>{profile.email}</p>
                   </div>
-                ) : (
-                  <Button
-                    variant="danger"
-                    onClick={() => setIsDeleteConfirmed(true)}
-                  >
-                    Cancella utente
-                  </Button>
-                )}
+                  <div className="text-center w50">
+                    <p>Il tuo id:</p>
+                    <p>{profile._id}</p>
+                  </div>
+
+                  {isDeleteConfirmed ? (
+                    <div>
+                      <p>Sei sicuro di voler eliminare l'utente?</p>
+                      <Button variant="danger" onClick={handleDeleteUser}>
+                        Sì
+                      </Button>
+                      <Button
+                        variant="secondary"
+                        onClick={() => setIsDeleteConfirmed(false)}
+                      >
+                        No
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button
+                      variant="danger"
+                      onClick={() => setIsDeleteConfirmed(true)}
+                    >
+                      Cancella utente
+                    </Button>
+                  )}
+                </div>
+              ) : (
+                <p>
+                  Devi effettuare il login per visualizzare il profilo utente.
+                </p>
+              )}
+              <div>
+                {error && <p className="text-danger">Errore: {error}</p>}
               </div>
-            ) : (
-              <p>
-                Devi effettuare il login per visualizzare il profilo utente.
-              </p>
-            )}
-            <div>{error && <p className="text-danger">Errore: {error}</p>}</div>
-          </div>
-        </Col>
-      </div>
+            </div>
+          </Col>
+        </div>
+      )}
     </Container>
   );
 }

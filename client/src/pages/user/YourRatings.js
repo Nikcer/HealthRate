@@ -3,7 +3,7 @@ import axios from "axios";
 import Card from "react-bootstrap/Card";
 import { useAuth } from "../../context/AuthProvider";
 import { useUserData } from "../../context/AuthProvider";
-
+import Loader from "../../components/Loader/Loader";
 function YourRatings() {
   const { userData } = useUserData();
   const { auth } = useAuth();
@@ -74,7 +74,7 @@ function YourRatings() {
           </div>
         </div>
       ) : (
-        "Caricamento..." || (
+        <Loader /> || (
           <div>{error && <p className="text-danger">Errore: {error}</p>}</div>
         )
       )}

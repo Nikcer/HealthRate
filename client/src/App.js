@@ -16,6 +16,7 @@ import AddClinic from "./pages/health-center/Add-clinic";
 import AddRating from "./pages/health-center/Add-rating";
 import ClinicForm from "./pages/health-center/ClinicForm";
 import YourRatings from "./pages/user/YourRatings";
+
 function App() {
   return (
     <div className="App">

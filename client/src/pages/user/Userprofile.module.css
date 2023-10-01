@@ -1,6 +1,6 @@
 .userProfileContainer {
   display: flex;
-
+  min-height: 100vh;
   padding-top: 1rem;
   flex-direction: column;
   text-align: center;

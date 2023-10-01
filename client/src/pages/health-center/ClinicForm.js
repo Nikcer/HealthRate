@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import { NavLink } from "react-router-dom";
 import styles from "./ClinicForm.module.css";
-
+import Loader from "../../components/Loader/Loader";
 function DisplayClinic() {
   const { resultId } = useParams();
   const { auth } = useAuth();
@@ -58,9 +58,7 @@ function DisplayClinic() {
           <div>
             <h1 className="p-2">
               Clinica:{" "}
-              {results.healthCenter
-                ? results.healthCenter.nome
-                : "Caricamento..."}
+              {results.healthCenter ? results.healthCenter.nome : <Loader />}
             </h1>
             <Container fluid>
               <div className="container text-center border border-2 border-info rounded-2 ">
@@ -68,34 +66,42 @@ function DisplayClinic() {
                   <div className="col-sm p-4" user_name="Test 1">
                     <h6>
                       Città:{" "}
-                      {results.healthCenter
-                        ? results.healthCenter.citta
-                        : "Caricamento..."}
+                      {results.healthCenter ? (
+                        results.healthCenter.citta
+                      ) : (
+                        <Loader />
+                      )}
                     </h6>
                   </div>
                   <div className="col-sm p-4" user_name="Test 1">
                     <h6>
                       Provincia:{" "}
-                      {results.healthCenter
-                        ? results.healthCenter.provincia
-                        : "Caricamento..."}
+                      {results.healthCenter ? (
+                        results.healthCenter.provincia
+                      ) : (
+                        <Loader />
+                      )}
                     </h6>
                   </div>
 
                   <div className="col-sm p-4" user_name="Test 1">
                     <h6>
                       Regione:{" "}
-                      {results.healthCenter
-                        ? results.healthCenter.regione
-                        : "Caricamento..."}
+                      {results.healthCenter ? (
+                        results.healthCenter.regione
+                      ) : (
+                        <Loader />
+                      )}
                     </h6>
                   </div>
                   <div className="col-sm p-4" user_name="Test 1">
                     <h6>
                       Indirizzo:{" "}
-                      {results.healthCenter
-                        ? results.healthCenter.indirizzo
-                        : "Caricamento..."}
+                      {results.healthCenter ? (
+                        results.healthCenter.indirizzo
+                      ) : (
+                        <Loader />
+                      )}
                     </h6>
                   </div>
                 </div>
@@ -103,9 +109,11 @@ function DisplayClinic() {
                   <div className="col-sm p-4">
                     <h6>
                       Cap:{" "}
-                      {results.healthCenter
-                        ? results.healthCenter.cap
-                        : "Caricamento..."}
+                      {results.healthCenter ? (
+                        results.healthCenter.cap
+                      ) : (
+                        <Loader />
+                      )}
                     </h6>
                   </div>
                   <h6 className="col-sm p-4">
@@ -119,20 +127,24 @@ function DisplayClinic() {
                         {results.healthCenter.sitoWeb}
                       </a>
                     ) : (
-                      "Caricamento..."
+                      <Loader />
                     )}
                   </h6>
                   <h6 className="col-sm p-4">
                     Telefono:{" "}
-                    {results.healthCenter
-                      ? results.healthCenter.telefono
-                      : "Caricamento..."}
+                    {results.healthCenter ? (
+                      results.healthCenter.telefono
+                    ) : (
+                      <Loader />
+                    )}
                   </h6>
                   <h6 className="col-sm p-4">
                     Email:{" "}
-                    {results.healthCenter
-                      ? results.healthCenter.email
-                      : "Caricamento..."}
+                    {results.healthCenter ? (
+                      results.healthCenter.email
+                    ) : (
+                      <Loader />
+                    )}
                   </h6>
                 </div>
               </div>
@@ -140,7 +152,7 @@ function DisplayClinic() {
           </div>
         </Row>
       ) : (
-        "Caricamento..."
+        <Loader />
       )}
       <Row className=" d-flex p-3">
         <h3 className=" p-3">Valutazioni</h3>

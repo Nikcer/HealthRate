@@ -174,7 +174,7 @@ function Addclinic() {
               to={`/addrating/${resultId}`}
               className=" text-reset text-decoration-none"
             >
-              Lascia Recensione
+              Inserisci Recensione
             </NavLink>
           </Button>
           <div className="pt-5">
