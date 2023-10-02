@@ -56,8 +56,8 @@ function DisplayClinic() {
       {results ? (
         <Row>
           <div>
-            <h1 className="p-2">
-              Clinica:{" "}
+            <h1 className="p-5">
+              Clinica:
               {results.healthCenter ? results.healthCenter.nome : <Loader />}
             </h1>
             <Container fluid>
@@ -155,7 +155,7 @@ function DisplayClinic() {
         <Loader />
       )}
       <Row className=" d-flex p-3">
-        <h3 className=" p-3">Valutazioni</h3>
+        <h3 className=" p-5">Valutazioni</h3>
         <div className={styles.cardContainer}>
           <div className="col pt-5 pb-2">
             {results && results.ratings
@@ -204,7 +204,7 @@ function DisplayClinic() {
           </Button>
         </Col>
       ) : (
-        <p className="text-danger">Errore: {error}</p>
+        <Loader /> || <p className="text-danger">Errore: {error}</p>
       )}
     </section>
   );

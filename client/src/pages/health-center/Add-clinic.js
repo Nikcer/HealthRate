@@ -51,7 +51,7 @@ function Addclinic() {
       );
 
       console.log("Clinica aggiuntacon successo", response.data._id);
-      setSucces("Clinica aggiuntacon successo");
+      setSucces("Clinica aggiunta con successo");
       setResultId(response.data._id);
     } catch (err) {
       setError("Errore durante la registrazione");
