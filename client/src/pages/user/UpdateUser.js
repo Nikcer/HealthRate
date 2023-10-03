@@ -54,7 +54,11 @@ function UpdateUser(user) {
       <h2>Aggiorna Email</h2>
       {auth.isAuthenticated ? (
         <Form onSubmit={handleUpdateUser}>
-          <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+          <Form.Group
+            as={Row}
+            className="mb-3 p-5"
+            controlId="formHorizontalEmail"
+          >
             <Form.Label column sm={2}>
               Nuova Email
             </Form.Label>
@@ -70,13 +74,13 @@ function UpdateUser(user) {
 
           <Form.Group
             as={Row}
-            className="mb-3"
+            className="mb-3 p-5"
             controlId="formHorizontalPassword"
           >
             <Form.Label column sm={2}>
               Conferma Email
             </Form.Label>
-            <Col sm={8}>
+            <Col sm={8} className="p-2">
               <Form.Control
                 type="email"
                 value={confirmNewEmail}
