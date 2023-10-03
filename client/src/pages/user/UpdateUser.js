@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
-
+import styles from "./UpdateUser.module.css";
 function UpdateUser(user) {
   const { auth } = useAuth();
   const { userData } = useUserData();
@@ -50,7 +50,7 @@ function UpdateUser(user) {
   };
 
   return (
-    <div className="p-3">
+    <div className={styles.updateUserContainer}>
       <h2>Aggiorna Email</h2>
       {auth.isAuthenticated ? (
         <Form onSubmit={handleUpdateUser}>
@@ -58,7 +58,7 @@ function UpdateUser(user) {
             <Form.Label column sm={2}>
               Nuova Email
             </Form.Label>
-            <Col sm={10} className="p-2">
+            <Col sm={8} className="p-2">
               <Form.Control
                 type="email"
                 value={newEmail}
@@ -74,9 +74,9 @@ function UpdateUser(user) {
             controlId="formHorizontalPassword"
           >
             <Form.Label column sm={2}>
-              Conferma Nuova Password
+              Conferma Email
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={8}>
               <Form.Control
                 type="email"
                 value={confirmNewEmail}

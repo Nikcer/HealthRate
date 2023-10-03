@@ -46,6 +46,7 @@ function Login() {
     } catch (err) {
       setErrorMessage("Errore durante l'accesso. Controlla le credenziali.");
       setEmpityFields("");
+      setIsLoading(false);
       console.log("Errore durante l'accesso", err);
     }
   };
