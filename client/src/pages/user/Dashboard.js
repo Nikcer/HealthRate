@@ -52,6 +52,7 @@ function Dashboard() {
       console.log(results);
     } catch (error) {
       setError("Nessuna clinica trovata secondo i parametri inseriti");
+      setIsLoading(false);
 
       console.error("Errore nella ricerca:", error);
     }
