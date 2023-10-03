@@ -60,6 +60,7 @@ function Profilo() {
         console.log("Profilo: ", profile);
       } catch (error) {
         setError("Errore nel caricamento del profilo");
+        setIsLoading(false);
         console.log(error);
       }
     };
