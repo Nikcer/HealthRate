@@ -34,9 +34,11 @@ function Dashboard() {
     setIsLoading(true);
 
     if (results.length < 1) {
+      setIsLoading(false);
       setError("Nessuna clinica trovata secondo i parametri inseriti");
     }
     if (!query.nome && !query.citta && !query.provincia && !query.regione) {
+      setIsLoading(false);
       setError("Inserire parametri di ricerca");
       return;
     }
