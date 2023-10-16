@@ -18,7 +18,7 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const [empityFields, setEmpityFields] = useState("");
   const navigate = useNavigate();
-
+  /*   const jwt = require("jsonwebtoken"); */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,6 +38,8 @@ function Login() {
       );
       console.log("Accesso avvenuto con successo", response.data);
       const token = response.data.token;
+      /* const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+      console.log(decodedToken); */
       login(token);
       const userData = response.data;
       setUserData(userData);
@@ -62,7 +64,7 @@ function Login() {
         >
           <div className="d-md-block">
             <Form.Group className="mb-3">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Indirizzo Email</Form.Label>
               <Form.Control
                 type="email"
                 value={email}

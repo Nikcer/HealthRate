@@ -42,10 +42,6 @@ const healthCenterSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  rating: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Rating",
-  },
 });
 
 const HealthCenter = mongoose.model("HealthCenter", healthCenterSchema);
