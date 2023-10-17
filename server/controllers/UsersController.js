@@ -37,8 +37,18 @@ const signupUser = async (req, res) => {
 //Get user profile
 
 const getUserProfile = async (req, res) => {
+  const { id } = req.params;
+
+  const token = req.headers.authorization;
+  if (!token) {
+    return res.status(401).json({ error: "Token not valid" });
+  }
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  if (decoded._id !== id) {
+    return res.status(403).json({ error: "Unauthorized" });
+  }
+
   try {
-    const { id } = req.params;
     const user = await User.findById(id).select("-password");
 
     if (!user) {

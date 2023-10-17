@@ -1,6 +1,6 @@
 const app = require("./app");
 const connectDB = require("./database");
-const PORT = process.env.PORT || 10000;
+const PORT = /* process.env.PORT || */ 8080;
 connectDB();
 
 app.listen(PORT, () =>
