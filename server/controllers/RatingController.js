@@ -24,7 +24,7 @@ const getRatingsByHealthCenter = async (req, res) => {
     const healthCenter = await HealthCenter.findById(id);
 
     if (!healthCenter) {
-      return res.status(404).json({ message: "Health Center non trovato" });
+      return res.status(404).json({ message: "Health Center not find" });
     }
     const ratings = await Rating.find({ healthCenter: id });
     res.status(200).json({ healthCenter, ratings });
@@ -38,7 +38,7 @@ const getRatingsByUser = async (req, res) => {
   try {
     const user = await User.findById(id);
     if (!user) {
-      res.status(404).json({ message: "Utente non trovato" });
+      res.status(404).json({ message: "User not find" });
     }
     const ratings = await Rating.find({ user: id }).populate({
       path: "healthCenter",
@@ -54,7 +54,7 @@ const deleteRating = async (req, res) => {
   const { id } = req.params;
   try {
     const rating = await Rating.findByIdAndDelete(id);
-    res.status(200).json({ message: "Rating eliminato correttamente" });
+    res.status(200).json({ message: "Rating deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

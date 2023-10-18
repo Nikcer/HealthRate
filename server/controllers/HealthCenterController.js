@@ -113,7 +113,7 @@ const deleteHealthCenter = async (req, res) => {
   try {
     const { id } = req.params;
     const healthCenter = await HealthCenter.findByIdAndDelete(id);
-    res.status(200).json({ message: "Health Center eliminato correttamente" });
+    res.status(200).json({ message: "Health Center deleted successfully" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-
+const checkAuthorization = require("../middlewares/checkUserAuth");
 //Create token
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "30d" });
@@ -39,27 +39,17 @@ const signupUser = async (req, res) => {
 const getUserProfile = async (req, res) => {
   const { id } = req.params;
 
-  const token = req.headers.authorization;
-  if (!token) {
-    return res.status(401).json({ error: "Token not valid" });
-  }
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  if (decoded._id !== id) {
-    return res.status(403).json({ error: "Unauthorized" });
-  }
-
   try {
     const user = await User.findById(id).select("-password");
 
     if (!user) {
-      return res.status(404).json({ message: "Utente non trovato" });
+      return res.status(404).json({ message: "User not find" });
     }
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
-
 //Get all users
 
 const getAllUsers = async (req, res) => {
@@ -79,7 +69,7 @@ const updateUserProfile = async (req, res) => {
 
   try {
     const user = await User.updateUser(id, email);
-    res.status(200).json({ message: "Profilo aggiornato correttamente", user });
+    res.status(200).json({ message: "Profile updated successfully", user });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -91,7 +81,7 @@ const updateUserPassword = async (req, res) => {
   const { password } = req.body;
   try {
     const newPassword = await User.updatePassword(id, password);
-    res.status(200).json({ message: "Password aggiornata correttamente" });
+    res.status(200).json({ message: "Password updated successfully" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -100,10 +90,9 @@ const updateUserPassword = async (req, res) => {
 //Delete user
 
 const deleteUser = async (req, res) => {
-  const { id } = req.params;
   try {
-    const user = await User.findByIdAndDelete(id);
-    res.status(200).json({ message: "Utente eliminato correttamente" });
+    const user = await User.findByIdAndDelete(reqUserId);
+    res.status(200).json({ message: "Profile deleted successfully" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

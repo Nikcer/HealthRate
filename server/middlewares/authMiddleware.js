@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
   const token = req.header("Authorization");
 
   if (!token) {
-    return res.status(401).json({ error: "Accesso non autorizzato" });
+    return res.status(401).json({ error: "Token not valid" });
   }
 
   try {
@@ -16,9 +16,10 @@ module.exports = async (req, res, next) => {
       throw new Error();
     }
 
-    req.user = user;
+    req.user = decoded;
+
     next();
   } catch (error) {
-    res.status(401).json({ error: "Accesso non autorizzato" });
+    res.status(500).json({ error: "Access denied", error: error.message });
   }
 };
