@@ -33,7 +33,7 @@ app.get("/api", (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.status(404).json({ message: "Risorsa non trovata" });
+  res.status(404).json({ message: "Resource not found" });
 });
 
 module.exports = app;

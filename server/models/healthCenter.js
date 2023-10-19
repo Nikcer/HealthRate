@@ -1,36 +1,36 @@
 const mongoose = require("mongoose");
 
 const healthCenterSchema = new mongoose.Schema({
-  nome: {
+  name: {
     type: String,
     required: true,
     trim: true,
   },
-  indirizzo: {
+  address: {
     type: String,
     required: true,
     trim: true,
   },
-  citta: {
+  city: {
     type: String,
     required: true,
     trim: true,
   },
-  provincia: {
+  district: {
     type: String,
     required: true,
     trim: true,
   },
-  regione: {
+  region: {
     type: String,
     required: true,
     trim: true,
   },
-  cap: {
+  zip_code: {
     type: String,
     trim: true,
   },
-  telefono: {
+  phone_number: {
     type: String,
     trim: true,
   },
@@ -38,7 +38,7 @@ const healthCenterSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  sitoWeb: {
+  website: {
     type: String,
     trim: true,
   },

@@ -2,27 +2,27 @@ const HealthCenter = require("../models/healthCenter");
 
 const addHealthCenter = async (req, res) => {
   const {
-    nome,
-    indirizzo,
-    citta,
-    provincia,
-    regione,
-    cap,
-    telefono,
+    name,
+    address,
+    city,
+    district,
+    region,
+    zip_code,
+    phone_number,
     email,
-    sitoWeb,
+    website,
   } = req.body;
   try {
     const healthCenter = await HealthCenter.create({
-      nome,
-      indirizzo,
-      citta,
-      provincia,
-      regione,
-      cap,
-      telefono,
+      name,
+      address,
+      city,
+      district,
+      region,
+      zip_code,
+      phone_number,
       email,
-      sitoWeb,
+      website,
     });
     res.status(200).json(healthCenter);
   } catch (error) {
@@ -34,26 +34,26 @@ const updateHealthCenter = async (req, res) => {
   try {
     const { id } = req.params;
     const {
-      nome,
-      indirizzo,
-      citta,
-      provincia,
-      regione,
-      cap,
-      telefono,
+      name,
+      address,
+      city,
+      district,
+      region,
+      zip_code,
+      phone_number,
       email,
-      sitoWeb,
+      website,
     } = req.body;
     const healthCenter = await HealthCenter.findByIdAndUpdate(id, {
-      nome,
-      indirizzo,
-      citta,
-      provincia,
-      regione,
-      cap,
-      telefono,
+      name,
+      address,
+      city,
+      district,
+      region,
+      zip_code,
+      phone_number,
       email,
-      sitoWeb,
+      website,
     });
     res.status(200).json(healthCenter);
   } catch (error) {
@@ -81,24 +81,24 @@ const getHealtCenterData = async (req, res) => {
 };
 
 const searchHealthCenters = async (req, res) => {
-  const { nome, citta, provincia, regione } = req.query;
+  const { name, city, district, region } = req.query;
 
   const searchQuery = {};
 
-  if (nome) {
-    searchQuery.nome = new RegExp(nome, "i");
+  if (name) {
+    searchQuery.name = new RegExp(name, "i");
   }
 
-  if (citta) {
-    searchQuery.citta = new RegExp(citta, "i");
+  if (city) {
+    searchQuery.citta = new RegExp(city, "i");
   }
 
-  if (regione) {
-    searchQuery.regione = new RegExp(regione, "i");
+  if (region) {
+    searchQuery.regione = new RegExp(region, "i");
   }
 
-  if (provincia) {
-    searchQuery.provincia = new RegExp(provincia, "i");
+  if (district) {
+    searchQuery.provincia = new RegExp(district, "i");
   }
 
   try {
