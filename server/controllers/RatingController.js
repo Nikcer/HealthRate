@@ -42,7 +42,7 @@ const getRatingsByUser = async (req, res) => {
     }
     const ratings = await Rating.find({ user: id }).populate({
       path: "healthCenter",
-      select: "nome",
+      select: "name",
     });
     res.status(200).json({ user, ratings });
   } catch (error) {
