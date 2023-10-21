@@ -43,7 +43,7 @@ function YourRatings() {
     <div className="p-4">
       {yourRatings ? (
         <div>
-          <h1>Le tue recensioni</h1>
+          <h1>Your Ratings</h1>
           <div p-3="true">
             {yourRatings.ratings.map((rating, index) => (
               <div
@@ -53,19 +53,19 @@ function YourRatings() {
                 <Card>
                   <Card.Body>
                     <Card.Subtitle className="mb-4 text-muted">
-                      Clinica: {rating.healthCenter.nome}
+                      Clinic: {rating.healthCenter.nome}
                     </Card.Subtitle>
                     <Card.Subtitle className="mb-4 text-muted">
-                      Tempi di attesa: {rating.interval}
+                      Waiting time: {rating.interval} day
                     </Card.Subtitle>
                     <Card.Subtitle className="mb-4 text-muted">
-                      Esame: {rating.test}
+                      Test: {rating.test}
                     </Card.Subtitle>
                     <Card.Text className="mb-4 text-muted">
-                      Commento: {rating.comment}
+                      Comment: {rating.comment}
                     </Card.Text>
                     <Card.Subtitle className="mb-4 text-muted">
-                      Inserito il: {rating.inputDate}
+                      Added: {rating.inputDate}
                     </Card.Subtitle>
                   </Card.Body>
                 </Card>
@@ -75,7 +75,7 @@ function YourRatings() {
         </div>
       ) : (
         <Loader /> || (
-          <div>{error && <p className="text-danger">Errore: {error}</p>}</div>
+          <div>{error && <p className="text-danger">{error}</p>}</div>
         )
       )}
     </div>

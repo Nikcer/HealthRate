@@ -59,7 +59,8 @@ function Addrating() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/rating/healtcenter/${resultId}`
         );
-        console.log("Nome clinica", response.data.healthCenter.nome);
+        console.log(response.data.healthCenter);
+
         setName(response.data.healthCenter.nome);
       } catch (error) {
         setErrorName("Errore: ", error);
@@ -70,38 +71,35 @@ function Addrating() {
 
   return (
     <div className={styles.addRatingContainer}>
-      <h1 className="p-3">Clinica: {name ? name : errorName}</h1>
-      <h3 className="p-3">Aggiungi recensione</h3>
+      <h1 className="p-3">Clinic: {name ? name : errorName}</h1>
+      <h3 className="p-3">Add rating</h3>
       <Form onSubmit={handleAddRating}>
         <Row className="mb-3">
           <Form.Group as={Col} md="6">
-            <Form.Label>Tipo di esame</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Tipo di esame"
+              placeholder="Clinical test"
               value={test}
               onChange={(e) => setTest(e.target.value)}
               required
             />
           </Form.Group>
           <Form.Group as={Col} md="6">
-            <Form.Label>Tempo di attesa</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Tempo di attesa"
+              placeholder="Waiting time"
               value={interval}
               onChange={(e) => setInterval(e.target.value)}
               required
             />
           </Form.Group>
           <Form.Group md="6" className="mb-3 p-2">
-            <Form.Label>Commento</Form.Label>
             <Form.Control
               as="textarea"
               rows={6}
               col={6}
               type="text"
-              placeholder="Commento"
+              placeholder="Comment"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
@@ -109,7 +107,7 @@ function Addrating() {
         </Row>
         <Row>
           <Col>
-            <Button type="submit">Inserisci</Button>
+            <Button type="submit">Add</Button>
           </Col>
 
           <Col>
@@ -118,7 +116,7 @@ function Addrating() {
                 className=" text-reset text-decoration-none"
                 to="/dashboard"
               >
-                Torna alla pagina precedente
+                Back
               </NavLink>
             </Button>
           </Col>

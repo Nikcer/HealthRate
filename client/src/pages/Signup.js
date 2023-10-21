@@ -45,17 +45,17 @@ function Signup() {
       const errorMessage = error.response
         ? error.response.data.error
         : "Unknown error";
-      console.log("Errore durante la registrazione", error.response.data);
+      console.log("Error", error.response.data);
       if (errorMessage.includes("duplicate key error")) {
         setEmpityFields("");
-        setErrorMessage("Username già esistente");
+        setErrorMessage("Username already exists");
         return;
       } else if (errorMessage.includes("Email")) {
         setEmpityFields("");
-        setErrorMessage("Email già esistente");
+        setErrorMessage("Email already exists");
         return;
       } else {
-        setErrorMessage("Errore durante la registrazione: " + errorMessage);
+        setErrorMessage("Error: " + errorMessage);
       }
     }
   };
@@ -63,39 +63,40 @@ function Signup() {
   return (
     <>
       <div className="p-3">
-        <h1>Registrazione</h1>
+        <h1>JOIN OUR COMMUNITY</h1>
         <p className="text-danger">
-          La password deve contenere 8 caratteri con almeno una lettera
-          maiuscola, una lettera minuscola, un numero e un carattere speciale.
+          Your password needs to have at least 8 characters with at least one
+          uppercase letter, one lowercase letter, one number and one special
+          character.
         </p>
       </div>
       <Form
-        className="d-flex flex-column p-3 gap-2 col-9 mx-auto"
+        className="d-flex flex-column p-3 gap-2 col-4 mx-auto"
         onSubmit={handleSubmit}
       >
         <Row className="mb-3">
           <Form.Group as={Row} className="p-3" controlId="formGroupUsername">
-            <Form.Label sm={1}>Username</Form.Label>
+            <Form.Label sm={1}></Form.Label>
             <Form.Control
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Inserire Username"
+              placeholder="Username"
             />
           </Form.Group>
           <Form.Group as={Row} className="p-3">
-            <Form.Label sm={1}>Indirizzo Email</Form.Label>
+            <Form.Label sm={1}></Form.Label>
             <Form.Control
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Inserire Email"
+              placeholder="Email Address"
             />
           </Form.Group>
         </Row>
         <Row className="mb-3">
           <Form.Group as={Row} className="p-3">
-            <Form.Label sm={1}>Password</Form.Label>
+            <Form.Label sm={1}></Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"
@@ -108,19 +109,19 @@ function Signup() {
             className="mb-3 p-3"
             controlId="formGroupConfirmPassword"
           >
-            <Form.Label sm={1}>Conferma Password</Form.Label>
+            <Form.Label sm={1}></Form.Label>
             <Form.Control
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Conferma Password"
+              placeholder="Confirm Password"
             />
           </Form.Group>
         </Row>
         {empityFields && (
           <div>
             <GoAlert />
-            <p class="text-md-center">Tutti i campi sono obligatori</p>
+            <p class="text-md-center">The fields are required</p>
           </div>
         )}
         {errorMessage && (
@@ -129,7 +130,7 @@ function Signup() {
             <h5>{errorMessage}</h5>
           </div>
         )}
-        <Button type="submit">Registrati</Button>{" "}
+        <Button type="submit">Join us</Button>{" "}
       </Form>
     </>
   );

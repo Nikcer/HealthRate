@@ -40,8 +40,8 @@ function Footer() {
         </Container>
         <Container>
           <p className="mx-auto">
-            Nicolò Cerra | Copyright 2023 | Start2impact University Corso Full
-            Stack Development | Progetto Finale
+            Nicolò Cerra | Copyright 2023 | Start2impact University: Full Stack
+            Development | Final Project
           </p>
         </Container>
       </div>

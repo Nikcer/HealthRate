@@ -21,7 +21,7 @@ const ChangeCredentials = (password) => {
   const handleChangePassword = async (e) => {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
-      setErrorMessage("Le password non corrispondono");
+      setErrorMessage("Passwords must match");
       return;
     }
 
@@ -38,19 +38,20 @@ const ChangeCredentials = (password) => {
         }
       );
       navigate("/userprofile");
-      console.log("Password cambiata con successo", response.data);
+      console.log("Password update successfully!", response.data);
       setErrorMessage("");
     } catch (error) {
-      console.error("Errore durante il cambio della password", error);
-      setErrorMessage("Errore durante il cambio della password");
+      console.error("Error", error);
+      setErrorMessage("Error");
     }
   };
   return (
     <div className="p-3">
-      <h1>Cambia Password</h1>
+      <h1>Update Password</h1>
       <p className="text-danger">
-        La password deve contenere 8 caratteri con almeno una lettera maiuscola,
-        una lettera minuscola, un numero e un carattere speciale.
+        Your password needs to have at least 8 characters with at least one
+        uppercase letter, one lowercase letter, one number and one special
+        character.
       </p>
       {auth.isAuthenticated ? (
         <Form onSubmit={handleChangePassword}>
@@ -59,11 +60,11 @@ const ChangeCredentials = (password) => {
             className="flex-column p-3"
             controlId="formHorizontalEmail"
           >
-            <Form.Label sm={1}>Nuova Password</Form.Label>
+            <Form.Label sm={1}></Form.Label>
             <Col>
               <Form.Control
                 type="password"
-                placeholder="Nuova Password"
+                placeholder="New Password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 required
@@ -76,13 +77,13 @@ const ChangeCredentials = (password) => {
             className="flex-column p-3"
             controlId="formHorizontalPassword"
           >
-            <Form.Label sm={2}>Conferma NuovaPassword</Form.Label>
+            <Form.Label sm={2}></Form.Label>
             <Col>
               <Form.Control
                 type="password"
                 value={confirmNewPassword}
                 onChange={(e) => setConfirmNewPassword(e.target.value)}
-                placeholder="Conferma Password"
+                placeholder="Confirm New Password"
                 required
               />
             </Col>
@@ -91,13 +92,11 @@ const ChangeCredentials = (password) => {
           {errorMessage && <p className="text-danger">{errorMessage}</p>}
 
           <Button variant="primary" type="submit">
-            Cambia Password
+            Update
           </Button>
         </Form>
       ) : (
-        <p>
-          Devi effettuare il login per modificare la password il profilo utente.
-        </p>
+        <p>You must log in to change your Password.</p>
       )}
     </div>
   );

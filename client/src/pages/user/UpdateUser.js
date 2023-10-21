@@ -21,7 +21,7 @@ function UpdateUser(user) {
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     if (newEmail !== confirmNewEmail) {
-      setErrorMessage("L'Email non corrispondono");
+      setErrorMessage("Email must match");
       return;
     }
 
@@ -41,51 +41,47 @@ function UpdateUser(user) {
       console.log("UserData email", userData.email);
 
       navigate("/userprofile");
-      console.log("Utente aggiornato correttamente", response.data);
+      console.log("Email successfully updated", response.data);
       setErrorMessage("");
     } catch (err) {
-      console.error("Errore", err);
-      setErrorMessage("Errore durante l'aggiornamento del profilo");
+      console.error("Error", err);
+      setErrorMessage("Error");
     }
   };
 
   return (
     <div className={styles.updateUserContainer}>
-      <h2>Aggiorna Email</h2>
+      <h2>Update Email</h2>
       {auth.isAuthenticated ? (
         <Form onSubmit={handleUpdateUser}>
           <Form.Group
             as={Row}
-            className="mb-3 p-5"
+            className="mb-1 p-4"
             controlId="formHorizontalEmail"
           >
-            <Form.Label column sm={2}>
-              Nuova Email
-            </Form.Label>
-            <Col sm={8} className="p-2">
+            <Form.Label column sm={2}></Form.Label>
+            <Col sm={4}>
               <Form.Control
                 type="email"
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
-                placeholder="Nuova Email"
+                placeholder="New Email"
               />
             </Col>
           </Form.Group>
 
           <Form.Group
             as={Row}
-            className="mb-3 p-5"
+            className="mb-1 p-4"
             controlId="formHorizontalPassword"
           >
-            <Form.Label column sm={2}>
-              Conferma Email
-            </Form.Label>
-            <Col sm={8} className="p-2">
+            <Form.Label column sm={2}></Form.Label>
+            <Col sm={4} className="p-2">
               <Form.Control
                 type="email"
                 value={confirmNewEmail}
                 onChange={(e) => setConfirmNewEmail(e.target.value)}
-                placeholder="Conferma Email"
+                placeholder="Confirm  Email"
                 required
               />
             </Col>
@@ -93,14 +89,12 @@ function UpdateUser(user) {
 
           {errorMessage && <p className="text-danger">{errorMessage}</p>}
 
-          <Button variant="primary" type="submit">
-            Aggiorna
+          <Button variant="primary" type="submit" className="mb-3">
+            Update
           </Button>
         </Form>
       ) : (
-        <p>
-          Devi effettuare il login per modificare la password il profilo utente.
-        </p>
+        <p>You must log in to change your Email.</p>
       )}
     </div>
   );

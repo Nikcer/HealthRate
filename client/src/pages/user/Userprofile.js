@@ -33,9 +33,9 @@ function Profilo() {
 
       logout();
       navigate("/login");
-      console.log("Utente eliminato correttamente", response);
+      console.log("User successfully deleted!", response);
     } catch (error) {
-      console.error("Errore durante l'eliminazione dell'utente", error);
+      console.error("Error", error);
       setError(error);
     }
   };
@@ -57,16 +57,16 @@ function Profilo() {
         console.log("data", data);
         setIsLoading(false);
         setProfile(data);
-        console.log("Profilo: ", profile);
+        console.log("Profile: ", profile);
       } catch (error) {
-        setError("Errore nel caricamento del profilo");
+        setError("Error");
         setIsLoading(false);
         console.log(error);
       }
     };
     fetchProfile();
 
-    console.log("Profilo: ", profile);
+    console.log("Profile: ", profile);
     // eslint-disable-next-line
   }, []);
 
@@ -78,24 +78,24 @@ function Profilo() {
         <div className="">
           <Col className="pb-1">
             <div xs={2} md={1} className="pt-2 d-grid gap-3  mx-auto">
-              <h1>Profilo Utente</h1>
+              <h1>Your Profile</h1>
               {auth.isAuthenticated ? (
                 <div>
-                  <p>Benvenuto: {profile.username}</p>
+                  <p>Welcome: {profile.username}</p>
                   <div className="text-center w50">
-                    <p>La tua Email:</p>
+                    <p>Your Email:</p>
                     <p>{profile.email}</p>
                   </div>
                   <div className="text-center w50">
-                    <p>Il tuo id:</p>
+                    <p>Your id:</p>
                     <p>{profile._id}</p>
                   </div>
 
                   {isDeleteConfirmed ? (
                     <div>
-                      <p>Sei sicuro di voler eliminare l'utente?</p>
+                      <p>Are you sure you want to delete the user?</p>
                       <Button variant="danger" onClick={handleDeleteUser}>
-                        Sì
+                        Yes
                       </Button>
                       <Button
                         variant="secondary"
@@ -109,14 +109,12 @@ function Profilo() {
                       variant="danger"
                       onClick={() => setIsDeleteConfirmed(true)}
                     >
-                      Cancella utente
+                      Delete User
                     </Button>
                   )}
                 </div>
               ) : (
-                <p>
-                  Devi effettuare il login per visualizzare il profilo utente.
-                </p>
+                <p>You must log in to view your user profile.</p>
               )}
               <div>
                 {error && <p className="text-danger">Errore: {error}</p>}

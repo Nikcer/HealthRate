@@ -35,11 +35,11 @@ function Dashboard() {
 
     if (results.length < 1) {
       setIsLoading(false);
-      setError("Nessuna clinica trovata secondo i parametri inseriti");
+      setError("Not clinic found");
     }
     if (!query.nome && !query.citta && !query.provincia && !query.regione) {
       setIsLoading(false);
-      setError("Inserire parametri di ricerca");
+      setError("Add search parameters");
       return;
     }
     try {
@@ -53,10 +53,10 @@ function Dashboard() {
       setIsLoading(false);
       console.log(results);
     } catch (error) {
-      setError("Nessuna clinica trovata secondo i parametri inseriti");
+      setError("Not clinic found");
       setIsLoading(false);
 
-      console.error("Errore nella ricerca:", error);
+      console.error("Error:", error);
     }
   };
   const handleAddReview = (resultId) => {
@@ -79,41 +79,41 @@ function Dashboard() {
             <Row md={1}>
               <Button size="md" className="border">
                 <NavLink to="/addclinic" className="nav-link">
-                  Inserisci Nuova Clinica
+                  Add New Clinic
                 </NavLink>
               </Button>
             </Row>
             <Row md={1}>
               <Button size="md" className="border">
                 <NavLink to="/Userprofile" className="nav-link">
-                  Il tuo profilo
+                  Your Profile
                 </NavLink>
               </Button>
             </Row>
             <Row md={1}>
               <Button size="md" className="border">
                 <NavLink to="/yourratings" className="nav-link">
-                  Le tue recensioni
+                  Your Ratings
                 </NavLink>
               </Button>
             </Row>
             <Row md={1}>
               <Button size="md" className="border">
                 <NavLink to="/changecredentials" className="nav-link">
-                  Aggiorna Password
+                  Update Password
                 </NavLink>
               </Button>
             </Row>
             <Row md={1}>
               <Button size="md" className="border">
                 <NavLink to="/updateuser" className="nav-link">
-                  Aggiorna Email
+                  Update Email
                 </NavLink>
               </Button>
             </Row>
             <Row md={1}>
               <Button size="md" className="border" onClick={handleLogout}>
-                Esci
+                Logout
               </Button>
             </Row>
           </div>
@@ -121,46 +121,46 @@ function Dashboard() {
 
         <Col md={8} className={styles.searchContainer}>
           <div className="border border-primary-subtle p-2 mb-2 rounded border-3">
-            <h3 className="pt-4 ">Cerca clinica</h3>
+            <h3 className="pt-4 ">Search clinic</h3>
             <Form onSubmit={handleSubmit} className="pb-5">
               <Row className="mb-3">
                 <Form.Group as={Col} md="6" className="pb-3">
-                  <Form.Label>Nome</Form.Label>
+                  <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
                     name="nome"
                     value={query.nome}
                     onChange={handleChange}
-                    placeholder="Cerca per nome"
+                    placeholder="Search by Name"
                   />
                 </Form.Group>
                 <Form.Group as={Col} md="6" className="pb-3">
-                  <Form.Label>Città</Form.Label>
+                  <Form.Label>City</Form.Label>
                   <Form.Control
                     name="citta"
                     value={query.citta}
                     onChange={handleChange}
                     type="text"
-                    placeholder="Cerca per città"
+                    placeholder="Search by City"
                   />
                 </Form.Group>
               </Row>
               <Row className="mb-3">
                 <Form.Group as={Col} md="6" className="pb-3">
-                  <Form.Label>Provincia</Form.Label>
+                  <Form.Label>District</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Cerca per città"
+                    placeholder="Search by District"
                     name="provincia"
                     value={query.provincia}
                     onChange={handleChange}
                   />
                 </Form.Group>
                 <Form.Group as={Col} md="6" className="pb-3">
-                  <Form.Label>Regione</Form.Label>
+                  <Form.Label>Region</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Cerca per città"
+                    placeholder="Search by Region"
                     name="regione"
                     value={query.regione}
                     onChange={handleChange}
@@ -168,7 +168,7 @@ function Dashboard() {
                 </Form.Group>
               </Row>
               <Form.Group className="mb-3"></Form.Group>
-              <Button type="submit">Cerca</Button>
+              <Button type="submit">Search</Button>
             </Form>
           </div>
         </Col>
@@ -179,7 +179,7 @@ function Dashboard() {
           <Loader />
         ) : (
           <Col className="b-0">
-            {results.length > 0 && <h2>Risultati:</h2>}
+            {results.length > 0 && <h2>Results:</h2>}
             <div>
               {results.length > 0 ? (
                 results.map((result) => (
@@ -196,7 +196,7 @@ function Dashboard() {
                       onClick={() => handleAddReview(result._id)}
                       to={`/addrating/${result._id}`}
                     >
-                      Aggiungi Recensione
+                      Add Rating
                     </NavLink>
 
                     <NavLink
@@ -204,7 +204,7 @@ function Dashboard() {
                       onClick={() => handleAddReview(result._id)}
                       to={`/clinicform/${result._id}`}
                     >
-                      Visualizza Recensioni
+                      View Ratings
                     </NavLink>
                   </div>
                 ))

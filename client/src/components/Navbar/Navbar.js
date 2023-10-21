@@ -33,12 +33,12 @@ const Navbr = () => {
               <>
                 <button type="button" className={styles.btnSignup}>
                   <NavLink to="/dashboard" className={styles.navlink}>
-                    Esplora
+                    EXPLORE
                   </NavLink>
                 </button>
                 <button type="button" className={styles.btnSignup}>
                   <NavLink to="/userprofile" className={styles.navlink}>
-                    Profilo
+                    YOUR PROFILE
                   </NavLink>
                 </button>
                 <button
@@ -47,14 +47,14 @@ const Navbr = () => {
                   onClick={handleLogout}
                 >
                   <NavLink to="/login" className={styles.navlink}>
-                    Esci
+                    LOGOUT
                   </NavLink>
                 </button>
               </>
             ) : (
               <button type="button" className={styles.btnSignup}>
                 <NavLink to="/login" className={styles.navlink}>
-                  Accedi
+                  LOGIN
                 </NavLink>
               </button>
             )}
@@ -62,7 +62,7 @@ const Navbr = () => {
             {!auth.isAuthenticated && (
               <button type="button" className={styles.btnSignup}>
                 <NavLink to="/signup" className={styles.navlink}>
-                  Registrati
+                  SIGNUP
                 </NavLink>
               </button>
             )}
