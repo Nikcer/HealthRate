@@ -90,15 +90,15 @@ const searchHealthCenters = async (req, res) => {
   }
 
   if (city) {
-    searchQuery.citta = new RegExp(city, "i");
+    searchQuery.city = new RegExp(city, "i");
   }
 
   if (region) {
-    searchQuery.regione = new RegExp(region, "i");
+    searchQuery.region = new RegExp(region, "i");
   }
 
   if (district) {
-    searchQuery.provincia = new RegExp(district, "i");
+    searchQuery.district = new RegExp(district, "i");
   }
 
   try {
