@@ -188,7 +188,7 @@ function Dashboard() {
                     className="border border-danger-subtle  mb-2 rounded border-3"
                   >
                     <Card.Title>
-                      {result.nome} - {result.citta} - {result.regione}
+                      {result.name} - {result.city} - {result.region}
                     </Card.Title>
 
                     <NavLink
