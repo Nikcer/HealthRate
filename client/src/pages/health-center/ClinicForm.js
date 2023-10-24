@@ -17,7 +17,7 @@ function DisplayClinic() {
   const [results, setResults] = useState();
 
   const [error, setError] = useState();
-  console.log("Id ospedale:", resultId);
+  console.log("Id clinic:", resultId);
 
   const navigate = useNavigate();
 
@@ -29,23 +29,24 @@ function DisplayClinic() {
         );
         console.log("Response:", response.data);
         const data = await response.data;
+
         setResults(data);
 
-        console.log("dati: ", data);
+        console.log("data: ", data);
       } catch (error) {
         console.log(error);
-        setError("Errore:", error);
+        setError("Error:", error);
       }
     };
 
     fetchRating();
     console.log("fetchRating :", fetchRating());
-    console.log("Risultati:", results);
+    console.log("Risults:", results);
     // eslint-disable-next-line
   }, [resultId, auth.user]);
 
   useEffect(() => {
-    console.log("Risultati:", results);
+    console.log("Results:", results);
   }, [results]);
   const handleAddReview = (resultId) => {
     navigate(`/addrating/${resultId}`);
@@ -57,17 +58,17 @@ function DisplayClinic() {
         <Row>
           <div>
             <h1 className="p-5">
-              Clinica:
-              {results.healthCenter ? results.healthCenter.nome : <Loader />}
+              CLINIC:{" "}
+              {results.healthCenter ? results.healthCenter.name : <Loader />}
             </h1>
             <Container fluid>
               <div className="container text-center border border-2 border-info rounded-2 ">
                 <div className="row">
                   <div className="col-sm p-4" user_name="Test 1">
                     <h6>
-                      Città:{" "}
+                      City:{" "}
                       {results.healthCenter ? (
-                        results.healthCenter.citta
+                        results.healthCenter.city
                       ) : (
                         <Loader />
                       )}
@@ -75,9 +76,9 @@ function DisplayClinic() {
                   </div>
                   <div className="col-sm p-4" user_name="Test 1">
                     <h6>
-                      Provincia:{" "}
+                      District:{" "}
                       {results.healthCenter ? (
-                        results.healthCenter.provincia
+                        results.healthCenter.district
                       ) : (
                         <Loader />
                       )}
@@ -86,9 +87,9 @@ function DisplayClinic() {
 
                   <div className="col-sm p-4" user_name="Test 1">
                     <h6>
-                      Regione:{" "}
+                      Region:{" "}
                       {results.healthCenter ? (
-                        results.healthCenter.regione
+                        results.healthCenter.region
                       ) : (
                         <Loader />
                       )}
@@ -96,9 +97,9 @@ function DisplayClinic() {
                   </div>
                   <div className="col-sm p-4" user_name="Test 1">
                     <h6>
-                      Indirizzo:{" "}
+                      Address:{" "}
                       {results.healthCenter ? (
-                        results.healthCenter.indirizzo
+                        results.healthCenter.address
                       ) : (
                         <Loader />
                       )}
@@ -108,32 +109,32 @@ function DisplayClinic() {
                 <div className="row">
                   <div className="col-sm p-4">
                     <h6>
-                      Cap:{" "}
+                      Zip code:{" "}
                       {results.healthCenter ? (
-                        results.healthCenter.cap
+                        results.healthCenter.zip_code
                       ) : (
                         <Loader />
                       )}
                     </h6>
                   </div>
                   <h6 className="col-sm p-4">
-                    Sito Web:{" "}
+                    Web Site:{" "}
                     {results.healthCenter ? (
                       <a
-                        href={results.healthCenter.sitoWeb}
+                        href={results.healthCenter.website}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {results.healthCenter.sitoWeb}
+                        {results.healthCenter.website}
                       </a>
                     ) : (
                       <Loader />
                     )}
                   </h6>
                   <h6 className="col-sm p-4">
-                    Telefono:{" "}
+                    Phone number:{" "}
                     {results.healthCenter ? (
-                      results.healthCenter.telefono
+                      results.healthCenter.phone_number
                     ) : (
                       <Loader />
                     )}
@@ -155,7 +156,7 @@ function DisplayClinic() {
         <Loader />
       )}
       <Row className=" d-flex p-3">
-        <h3 className=" p-5">Valutazioni</h3>
+        <h3 className=" p-5">Ratings</h3>
         <div className={styles.cardContainer}>
           <div className="col pt-5 pb-2">
             {results && results.ratings
@@ -167,44 +168,54 @@ function DisplayClinic() {
                     <Card>
                       <Card.Body>
                         <Card.Subtitle className="mb-4 text-muted">
-                          Id Utente: {rating.user}
+                          User Id: {rating.user}
                         </Card.Subtitle>
                         <Card.Subtitle className="mb-4 text-muted">
-                          Tempi di attesa: {rating.interval}
+                          Waiting Time: {rating.interval}
                         </Card.Subtitle>
                         <Card.Subtitle className="mb-4 text-muted">
-                          Esame: {rating.test}
+                          Clinical test: {rating.test}
                         </Card.Subtitle>
                         <Card.Text className="mb-4 text-muted">
-                          Commento: {rating.comment}
+                          Comment: {rating.comment}
                         </Card.Text>
                         <Card.Subtitle className="mb-4 text-muted">
-                          Inserito il: {rating.inputDate}
+                          Date: {rating.inputDate}
                         </Card.Subtitle>
                       </Card.Body>
                     </Card>
                   </div>
                 ))
-              : <p>Nessuna valutazione disponibile</p> || (
-                  <p className="text-danger">Errore: {error}</p>
+              : <h3 className="text-danger">Not results were found</h3> || (
+                  <h3 className="text-danger">Error: {error}</h3>
                 )}
           </div>
         </div>
       </Row>
       {results ? (
         <Col className="flex column pb-4">
-          <Button type="button" size="md" className="border">
+          <Button type="button" size="md" className="p-2 m-2">
             <NavLink
               className="nav-link"
               onClick={() => handleAddReview(results.healthCenter._id)}
               to={`/addrating/${results.healthCenter._id}`}
             >
-              Aggiungi Recensione
+              Add Rating
+            </NavLink>
+          </Button>
+          <Button to="/dashboard" className="p-2 m-2">
+            <NavLink
+              className="text-reset text-decoration-none"
+              to="/dashboard"
+            >
+              Back
             </NavLink>
           </Button>
         </Col>
+      ) : results ? (
+        <h3 className="text-danger">No results were found</h3>
       ) : (
-        <Loader /> || <p className="text-danger">Errore: {error}</p>
+        <h3 className="text-danger">Error: {error}</h3>
       )}
     </section>
   );

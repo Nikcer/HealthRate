@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { GoAlert } from "react-icons/go";
+import Loader from "../components/Loader/Loader";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -13,6 +14,8 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [empityFields, setEmpityFields] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFormDisabled, setIsFormDisabled] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +33,9 @@ function Signup() {
     }
 
     try {
+      setIsLoading(true);
+      setIsFormDisabled(true);
+
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/users/signup`,
         {
@@ -62,76 +68,89 @@ function Signup() {
 
   return (
     <>
-      <div className="p-3">
-        <h1>JOIN OUR COMMUNITY</h1>
-        <p className="text-danger">
-          Your password needs to have at least 8 characters with at least one
-          uppercase letter, one lowercase letter, one number and one special
-          character.
-        </p>
-      </div>
-      <Form
-        className="d-flex flex-column p-3 gap-2 col-4 mx-auto"
-        onSubmit={handleSubmit}
-      >
-        <Row className="mb-3">
-          <Form.Group as={Row} className="p-3" controlId="formGroupUsername">
-            <Form.Label sm={1}></Form.Label>
-            <Form.Control
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
-            />
-          </Form.Group>
-          <Form.Group as={Row} className="p-3">
-            <Form.Label sm={1}></Form.Label>
-            <Form.Control
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email Address"
-            />
-          </Form.Group>
-        </Row>
-        <Row className="mb-3">
-          <Form.Group as={Row} className="p-3">
-            <Form.Label sm={1}></Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group
-            as={Row}
-            className="mb-3 p-3"
-            controlId="formGroupConfirmPassword"
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="p-3">
+          <h1>JOIN OUR COMMUNITY</h1>
+          <p className="text-danger">
+            Your password needs to have at least 8 characters with at least one
+            uppercase letter, one lowercase letter, one number and one special
+            character.
+          </p>
+          <Form
+            className="d-flex flex-column p-3 gap-2 col-4 mx-auto"
+            onSubmit={handleSubmit}
+            disable={isFormDisabled}
           >
-            <Form.Label sm={1}></Form.Label>
-            <Form.Control
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm Password"
-            />
-          </Form.Group>
-        </Row>
-        {empityFields && (
-          <div>
-            <GoAlert />
-            <p class="text-md-center">The fields are required</p>
-          </div>
-        )}
-        {errorMessage && (
-          <div>
-            <GoAlert />
-            <h5>{errorMessage}</h5>
-          </div>
-        )}
-        <Button type="submit">Join us</Button>{" "}
-      </Form>
+            <Row className="mb-3">
+              <Form.Group
+                as={Row}
+                className="p-3"
+                controlId="formGroupUsername"
+              >
+                <Form.Label sm={1}></Form.Label>
+                <Form.Control
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Username"
+                />
+              </Form.Group>
+              <Form.Group as={Row} className="p-3">
+                <Form.Label sm={1}></Form.Label>
+                <Form.Control
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email Address"
+                />
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group as={Row} className="p-3">
+                <Form.Label sm={1}></Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group
+                as={Row}
+                className="mb-3 p-3"
+                controlId="formGroupConfirmPassword"
+              >
+                <Form.Label sm={1}></Form.Label>
+                <Form.Control
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm Password"
+                />
+              </Form.Group>
+            </Row>
+            {empityFields && (
+              <div>
+                <GoAlert />
+                <h5 className="text-md-center text-danger">
+                  The fields are required
+                </h5>
+              </div>
+            )}
+            {errorMessage && (
+              <div>
+                <GoAlert />
+                <h5 className="text-danger">{errorMessage}</h5>
+              </div>
+            )}
+            <Button type="submit" disabled={isLoading}>
+              Join us
+            </Button>{" "}
+          </Form>
+        </div>
+      )}
     </>
   );
 }

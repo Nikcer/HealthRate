@@ -8,24 +8,29 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 import styles from "./UpdateUser.module.css";
-function UpdateUser(user) {
+function UpdateUser() {
   const { auth } = useAuth();
   const { userData } = useUserData();
 
   const [newEmail, setNewEmail] = useState("");
   const [confirmNewEmail, setConfirmNewEmail] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFormDisabled, setIsFormDisabled] = useState(false);
   const navigate = useNavigate();
 
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     if (newEmail !== confirmNewEmail) {
-      setErrorMessage("Email must match");
+      setError("Email must match");
       return;
     }
 
     try {
+      setIsLoading(true);
+      setIsFormDisabled(true);
       const response = await axios.patch(
         `${process.env.REACT_APP_API_URL}/api/users/${userData.id}`,
         {
@@ -42,59 +47,74 @@ function UpdateUser(user) {
 
       navigate("/userprofile");
       console.log("Email successfully updated", response.data);
-      setErrorMessage("");
+      setIsLoading(false);
     } catch (err) {
       console.error("Error", err);
-      setErrorMessage("Error");
+      setIsLoading(false);
+      setError("Error: ", err);
     }
   };
 
   return (
     <div className={styles.updateUserContainer}>
-      <h2>Update Email</h2>
-      {auth.isAuthenticated ? (
-        <Form onSubmit={handleUpdateUser}>
-          <Form.Group
-            as={Row}
-            className="mb-1 p-4"
-            controlId="formHorizontalEmail"
-          >
-            <Form.Label column sm={2}></Form.Label>
-            <Col sm={4}>
-              <Form.Control
-                type="email"
-                value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)}
-                placeholder="New Email"
-              />
-            </Col>
-          </Form.Group>
-
-          <Form.Group
-            as={Row}
-            className="mb-1 p-4"
-            controlId="formHorizontalPassword"
-          >
-            <Form.Label column sm={2}></Form.Label>
-            <Col sm={4} className="p-2">
-              <Form.Control
-                type="email"
-                value={confirmNewEmail}
-                onChange={(e) => setConfirmNewEmail(e.target.value)}
-                placeholder="Confirm  Email"
-                required
-              />
-            </Col>
-          </Form.Group>
-
-          {errorMessage && <p className="text-danger">{errorMessage}</p>}
-
-          <Button variant="primary" type="submit" className="mb-3">
-            Update
-          </Button>
-        </Form>
+      {isLoading ? (
+        <Loader />
       ) : (
-        <p>You must log in to change your Email.</p>
+        <div>
+          <h2>UPDATE EMAIL</h2>
+          {auth.isAuthenticated ? (
+            <Form onSubmit={handleUpdateUser} disabled={isFormDisabled}>
+              <Form.Group
+                as={Row}
+                className="mb-1 p-4"
+                controlId="formHorizontalEmail"
+              >
+                <Form.Label column sm={2}></Form.Label>
+                <Col sm={4}>
+                  <Form.Control
+                    type="email"
+                    value={newEmail}
+                    onChange={(e) => setNewEmail(e.target.value)}
+                    placeholder="New Email"
+                    required
+                  />
+                </Col>
+              </Form.Group>
+
+              <Form.Group
+                as={Row}
+                className="mb-1 p-4"
+                controlId="formHorizontalPassword"
+              >
+                <Form.Label column sm={2}></Form.Label>
+                <Col sm={4} className="p-2">
+                  <Form.Control
+                    type="email"
+                    value={confirmNewEmail}
+                    onChange={(e) => setConfirmNewEmail(e.target.value)}
+                    placeholder="Confirm Email"
+                    required
+                  />
+                </Col>
+              </Form.Group>
+
+              {error && <h3 className="text-danger">{error}</h3>}
+
+              <Button
+                variant="primary"
+                type="submit"
+                className="mb-3"
+                disabled={isLoading}
+              >
+                Update
+              </Button>
+            </Form>
+          ) : (
+            <h3 className="text-danger">
+              You must log in to change your Email.
+            </h3>
+          )}
+        </div>
       )}
     </div>
   );

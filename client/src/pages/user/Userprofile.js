@@ -16,6 +16,7 @@ function Profilo() {
   const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(true);
+
   const navigate = useNavigate();
 
   const handleDeleteUser = (e) => {
@@ -114,10 +115,12 @@ function Profilo() {
                   )}
                 </div>
               ) : (
-                <p>You must log in to view your user profile.</p>
+                <h3 className="text-danger">
+                  You must log in to view your user profile.
+                </h3>
               )}
               <div>
-                {error && <p className="text-danger">Errore: {error}</p>}
+                {error && <h3 className="text-danger">Error: {error}</h3>}
               </div>
             </div>
           </Col>

@@ -13,15 +13,16 @@ import styles from "./Dashboard.module.css";
 import Loader from "../../components/Loader/Loader";
 function Dashboard() {
   const [query, setQuery] = useState({
-    nome: "",
-    citta: "",
-    provincia: "",
-    regione: "",
+    name: "",
+    city: "",
+    district: "",
+    region: "",
   });
   const { logout } = useAuth();
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFormDisabled, setIsFormDisabled] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -37,14 +38,16 @@ function Dashboard() {
       setIsLoading(false);
       setError("Not clinic found");
     }
-    if (!query.nome && !query.citta && !query.provincia && !query.regione) {
+    if (!query.name && !query.city && !query.district && !query.region) {
       setIsLoading(false);
       setError("Add search parameters");
       return;
     }
     try {
+      setIsFormDisabled(true);
+
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/healthcenter?nome=${query.nome}&citta=${query.citta}&provincia=${query.provincia}&regione=${query.regione}`
+        `${process.env.REACT_APP_API_URL}/api/healthcenter?name=${query.name}&city=${query.city}&district=${query.district}&region=${query.region}`
       );
 
       const data = await response.data;
@@ -53,7 +56,7 @@ function Dashboard() {
       setIsLoading(false);
       console.log(results);
     } catch (error) {
-      setError("Not clinic found");
+      setError("Not clinics were found");
       setIsLoading(false);
 
       console.error("Error:", error);
@@ -122,14 +125,18 @@ function Dashboard() {
         <Col md={8} className={styles.searchContainer}>
           <div className="border border-primary-subtle p-2 mb-2 rounded border-3">
             <h3 className="pt-4 ">Search clinic</h3>
-            <Form onSubmit={handleSubmit} className="pb-5">
+            <Form
+              onSubmit={handleSubmit}
+              disable={isFormDisabled}
+              className="pb-5"
+            >
               <Row className="mb-3">
                 <Form.Group as={Col} md="6" className="pb-3">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
-                    name="nome"
-                    value={query.nome}
+                    name="name"
+                    value={query.name}
                     onChange={handleChange}
                     placeholder="Search by Name"
                   />
@@ -137,8 +144,8 @@ function Dashboard() {
                 <Form.Group as={Col} md="6" className="pb-3">
                   <Form.Label>City</Form.Label>
                   <Form.Control
-                    name="citta"
-                    value={query.citta}
+                    name="city"
+                    value={query.city}
                     onChange={handleChange}
                     type="text"
                     placeholder="Search by City"
@@ -151,8 +158,8 @@ function Dashboard() {
                   <Form.Control
                     type="text"
                     placeholder="Search by District"
-                    name="provincia"
-                    value={query.provincia}
+                    name="district"
+                    value={query.district}
                     onChange={handleChange}
                   />
                 </Form.Group>
@@ -161,14 +168,16 @@ function Dashboard() {
                   <Form.Control
                     type="text"
                     placeholder="Search by Region"
-                    name="regione"
-                    value={query.regione}
+                    name="region"
+                    value={query.region}
                     onChange={handleChange}
                   />
                 </Form.Group>
               </Row>
               <Form.Group className="mb-3"></Form.Group>
-              <Button type="submit">Search</Button>
+              <Button type="submit" disabled={isLoading}>
+                Search
+              </Button>
             </Form>
           </div>
         </Col>
@@ -179,7 +188,9 @@ function Dashboard() {
           <Loader />
         ) : (
           <Col className="b-0">
-            {results.length > 0 && <h2>Results:</h2>}
+            {results.length > 0 && (
+              <h3 className="text-success pt-3">RESULTS:</h3>
+            )}
             <div>
               {results.length > 0 ? (
                 results.map((result) => (
@@ -188,7 +199,7 @@ function Dashboard() {
                     className="border border-danger-subtle  mb-2 rounded border-3"
                   >
                     <Card.Title>
-                      {result.nome} - {result.citta} - {result.regione}
+                      {result.name} - {result.city} - {result.region}
                     </Card.Title>
 
                     <NavLink

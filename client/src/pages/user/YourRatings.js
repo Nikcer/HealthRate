@@ -43,7 +43,7 @@ function YourRatings() {
     <div className="p-4">
       {yourRatings ? (
         <div>
-          <h1>Your Ratings</h1>
+          <h1>YOUR RATINGS</h1>
           <div p-3="true">
             {yourRatings.ratings.map((rating, index) => (
               <div
@@ -74,10 +74,9 @@ function YourRatings() {
           </div>
         </div>
       ) : (
-        <Loader /> || (
-          <div>{error && <p className="text-danger">{error}</p>}</div>
-        )
+        <Loader />
       )}
+      {error && <h3 className="text-danger">{error}</h3>}
     </div>
   );
 }

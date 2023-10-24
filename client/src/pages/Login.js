@@ -15,7 +15,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [isFormDisabled, setIsFormDisabled] = useState(false);
+  const [error, setError] = useState("");
   const [empityFields, setEmpityFields] = useState("");
   const navigate = useNavigate();
 
@@ -24,11 +25,14 @@ function Login() {
 
     if (email === "" || password === "") {
       setEmpityFields(true);
-      setErrorMessage("");
+      setError("");
       return;
     }
-    setIsLoading(true);
+
     try {
+      setIsLoading(true);
+      setIsFormDisabled(true);
+
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/users/login`,
         {
@@ -44,7 +48,7 @@ function Login() {
       setIsLoading(false);
       navigate("/dashboard");
     } catch (err) {
-      setErrorMessage("Error. Check the fields.");
+      setError("Error: Check the fields.");
       setEmpityFields("");
       setIsLoading(false);
       console.log("Error:", err);
@@ -59,6 +63,7 @@ function Login() {
         <Form
           onSubmit={handleSubmit}
           className="pt-5 pb-5 d-grid gap-2 col-6 mx-auto"
+          disable={isFormDisabled}
         >
           <div className="d-md-block">
             <Form.Group className="mb-3">
@@ -83,7 +88,7 @@ function Login() {
               />
             </Form.Group>
           </div>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" disabled={isLoading}>
             Login
           </Button>
           <div className="container-lg">
@@ -91,14 +96,14 @@ function Login() {
               <div>
                 <GoAlert />
                 <br />
-                <h5>The fields are required</h5>
+                <h5 className="text-danger">The fields are required</h5>
               </div>
             )}
-            {errorMessage && (
+            {error && (
               <div>
                 <GoAlert />
                 <br />
-                <h5>{errorMessage}</h5>
+                <h5 className="text-danger">{error}</h5>
               </div>
             )}
           </div>
