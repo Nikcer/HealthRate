@@ -48,7 +48,7 @@ and
 
 4 - Create .env files:
 
-- in the server directory and add the variables as [in this file](https://github.com/ Nikcer/HealthRate/blob/master/server/.env.example)
+- in the server directory and add the variables as [in this file](https://github.com/Nikcer/HealthRate/blob/master/server/.env.example)
 
 - in the client directory and add the variables as [in this file](https://github.com/Nikcer/HealthRate/blob/master/client/.env.example)
 
@@ -64,11 +64,11 @@ and
 
 `npm start`
 
-### Demo
+## Demo
 
 Try it: [HealthRate](https://health-rate.vercel.app)
 
-### Contact Me
+## Contact Me
 
 👤 **Nicolò Cerra**
 
