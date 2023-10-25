@@ -8,9 +8,9 @@ import Card from "react-bootstrap/Card";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../../context/AuthProvider";
+import { useAuth } from "../../../context/AuthProvider";
 import styles from "./Dashboard.module.css";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 function Dashboard() {
   const [query, setQuery] = useState({
     name: "",

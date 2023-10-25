@@ -2,13 +2,13 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import styles from "./Userprofile.module.css";
-import { useAuth } from "../../context/AuthProvider";
-import { useUserData } from "../../context/AuthProvider";
+import { useAuth } from "../../../context/AuthProvider";
+import { useUserData } from "../../../context/AuthProvider";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 function Profilo() {
   const { auth, logout } = useAuth();
   const { userData } = useUserData();

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
-import { useAuth } from "../../context/AuthProvider";
-import { useUserData } from "../../context/AuthProvider";
-import Loader from "../../components/Loader/Loader";
+import { useAuth } from "../../../context/AuthProvider";
+import { useUserData } from "../../../context/AuthProvider";
+import Loader from "../../../components/Loader/Loader";
 function YourRatings() {
   const { userData } = useUserData();
   const { auth } = useAuth();

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Home.module.css";
-import logoOnu from "../asset/img/logoOnu.png";
+import logoOnu from "../../asset/img/logoOnu.png";
 
 const Home = () => {
   return (

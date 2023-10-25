@@ -2,12 +2,12 @@ import React from "react";
 
 import axios from "axios";
 import { useState } from "react";
-import { useAuth, useUserData } from "../context/AuthProvider";
+import { useAuth, useUserData } from "../../context/AuthProvider";
 import { NavLink, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { GoAlert } from "react-icons/go";
-import Loader from "../components/Loader/Loader";
+import Loader from "../../components/Loader/Loader";
 function Login() {
   const { login } = useAuth();
   const { setUserData } = useUserData();
@@ -63,7 +63,7 @@ function Login() {
         <Form
           onSubmit={handleSubmit}
           className="pt-5 pb-5 d-grid gap-2 col-6 mx-auto"
-          disable={isFormDisabled}
+          disabled={isFormDisabled}
         >
           <div className="d-md-block">
             <Form.Group className="mb-3">

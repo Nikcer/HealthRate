@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { GoAlert } from "react-icons/go";
-import Loader from "../components/Loader/Loader";
+import Loader from "../../components/Loader/Loader";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -81,7 +81,7 @@ function Signup() {
           <Form
             className="d-flex flex-column p-3 gap-2 col-4 mx-auto"
             onSubmit={handleSubmit}
-            disable={isFormDisabled}
+            disabled={isFormDisabled}
           >
             <Row className="mb-3">
               <Form.Group

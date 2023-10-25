@@ -6,8 +6,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../../context/AuthProvider";
-import Loader from "../../components/Loader/Loader";
+import { useAuth } from "../../../context/AuthProvider";
+import Loader from "../../../components/Loader/Loader";
 import styles from "./Add-clinic.module.css";
 import { useNavigate } from "react-router-dom";
 function Addclinic() {
@@ -92,7 +92,7 @@ function Addclinic() {
               <h3>ADD NEW CLINIC</h3>
               <Form
                 onSubmit={handleAddClinic}
-                disable={isFormDisabled}
+                disabled={isFormDisabled}
                 className="pt-4"
               >
                 <Row className="mb-2">

@@ -1,14 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { useAuth } from "../../context/AuthProvider";
+import { useAuth } from "../../../context/AuthProvider";
 import axios from "axios";
-import { useUserData } from "../../context/AuthProvider";
+import { useUserData } from "../../../context/AuthProvider";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 import styles from "./UpdateUser.module.css";
 function UpdateUser() {
   const { auth } = useAuth();

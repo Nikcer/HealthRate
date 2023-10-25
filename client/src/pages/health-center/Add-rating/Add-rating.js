@@ -6,10 +6,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../../context/AuthProvider";
-import { useUserData } from "../../context/AuthProvider";
+import { useAuth } from "../../../context/AuthProvider";
+import { useUserData } from "../../../context/AuthProvider";
 import { useParams } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 import styles from "./Add-rating.module.css";
 
 function Addrating() {
@@ -95,7 +95,7 @@ function Addrating() {
             <div>
               <h1 className="p-3">Clinic: {name ? name : errorName}</h1>
               <h3 className="p-3">Add rating</h3>
-              <Form onSubmit={handleAddRating} disable={isFormDisabled}>
+              <Form onSubmit={handleAddRating} disabled={isFormDisabled}>
                 <Row className="mb-3">
                   <Form.Group as={Col} md="6 mt-3">
                     <Form.Control

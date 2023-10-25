@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useAuth } from "../../context/AuthProvider";
+import { useAuth } from "../../../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import { NavLink } from "react-router-dom";
 import styles from "./ClinicForm.module.css";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 function DisplayClinic() {
   const { resultId } = useParams();
   const { auth } = useAuth();

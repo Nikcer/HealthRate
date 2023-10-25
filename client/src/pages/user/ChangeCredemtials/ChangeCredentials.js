@@ -1,14 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { useAuth } from "../../context/AuthProvider";
+import { useAuth } from "../../../context/AuthProvider";
 import axios from "axios";
-import { useUserData } from "../../context/AuthProvider";
+import { useUserData } from "../../../context/AuthProvider";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 
 const ChangeCredentials = (password) => {
   const { auth } = useAuth();
@@ -65,7 +65,7 @@ const ChangeCredentials = (password) => {
             character.
           </p>
           {auth.isAuthenticated ? (
-            <Form onSubmit={handleChangePassword} disable={isFormDisabled}>
+            <Form onSubmit={handleChangePassword} disabled={isFormDisabled}>
               <Form.Group
                 as={Row}
                 className="flex-column p-3"

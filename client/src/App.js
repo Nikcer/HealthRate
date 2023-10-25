@@ -1,21 +1,21 @@
 import "./App.css";
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Home from "./pages/Home";
-import Signup from "./pages/Signup";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/Signup/Signup";
 import Navbr from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import Login from "./pages/Login";
-import Userprofile from "./pages/user/Userprofile";
-import ChangeCredentials from "./pages/user/ChangeCredentials";
-import UpdateUser from "./pages/user/UpdateUser";
-import Dashbaord from "./pages/user/Dashboard";
-import AddClinic from "./pages/health-center/Add-clinic";
-import AddRating from "./pages/health-center/Add-rating";
-import ClinicForm from "./pages/health-center/ClinicForm";
-import YourRatings from "./pages/user/YourRatings";
+import Userprofile from "./pages/user/Userprofile/Userprofile";
+import ChangeCredentials from "./pages/user/ChangeCredemtials/ChangeCredentials";
+import UpdateUser from "./pages/user/UpdateUser/UpdateUser";
+import Dashbaord from "./pages/user/Dashboard/Dashboard";
+import YourRatings from "./pages/user/YourRatings/YourRatings";
+import AddClinic from "./pages/health-center/Add-clinic/Add-clinic";
+import AddRating from "./pages/health-center/Add-rating/Add-rating";
+import ClinicForm from "./pages/health-center/ClinicForm/ClinicForm";
 
 function App() {
   return (
