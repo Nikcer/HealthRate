@@ -39,11 +39,13 @@ of the UN: Ensure healthy lives and promote well-being for all at all ages.
 3 - Install the dependencies:
 
 `cd server`
+
 `npm install`
 
 and
 
 `cd client`
+
 `npm install`
 
 4 - Create .env files:
