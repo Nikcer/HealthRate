@@ -34,7 +34,7 @@ of the UN: Ensure healthy lives and promote well-being for all at all ages.
 
 `git clone https://github.com/Nikcer/HealthRate.git`
 
-2 - Type cd <project-name> to enter the project directory.
+2 - Type `cd <project-name>` to enter the project directory.
 
 3 - Install the dependencies:
 
