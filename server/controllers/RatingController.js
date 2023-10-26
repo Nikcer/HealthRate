@@ -24,7 +24,7 @@ const getRatingsByHealthCenter = async (req, res) => {
     const healthCenter = await HealthCenter.findById(id);
 
     if (!healthCenter) {
-      return res.status(404).json({ message: "Health Center not find" });
+      return res.status(404).json({ message: "Health center not found" });
     }
     const ratings = await Rating.find({ healthCenter: id });
     res.status(200).json({ healthCenter, ratings });
@@ -38,11 +38,11 @@ const getRatingsByUser = async (req, res) => {
   try {
     const user = await User.findById(id);
     if (!user) {
-      res.status(404).json({ message: "User not find" });
+      res.status(404).json({ message: "User not found" });
     }
     const ratings = await Rating.find({ user: id }).populate({
       path: "healthCenter",
-      select: "nome",
+      select: "name",
     });
     res.status(200).json({ user, ratings });
   } catch (error) {

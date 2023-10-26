@@ -1,4 +1,3 @@
-// middleware/checkAuthorization.js
 const checkAuthorization = (req, res, next) => {
   const reqUserId = req.params.id;
   const tokenId = req.user._id;

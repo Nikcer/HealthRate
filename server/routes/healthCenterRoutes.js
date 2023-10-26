@@ -3,7 +3,6 @@ const router = express.Router("router");
 const healthCenterController = require("../controllers/HealthCenterController");
 const autMiddleware = require("../middlewares/authMiddleware");
 
-/* router.get("/search", healthCenterController.searchHealthCenters); */
 router.get("/", healthCenterController.searchHealthCenters);
 
 router.get("/:id", healthCenterController.getHealtCenterData);
