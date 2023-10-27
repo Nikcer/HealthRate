@@ -95,7 +95,7 @@ function Addrating() {
             <div>
               <h1 className="p-3">Clinic: {name ? name : errorName}</h1>
               <h3 className="p-3">Add rating</h3>
-              <Form onSubmit={handleAddRating} disabled={isFormDisabled}>
+              <Form onSubmit={handleAddRating}>
                 <Row className="mb-3">
                   <Form.Group as={Col} md="6 mt-3">
                     <Form.Control
@@ -104,6 +104,7 @@ function Addrating() {
                       value={test}
                       onChange={(e) => setTest(e.target.value)}
                       required
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md="6 mt-3">
@@ -113,6 +114,7 @@ function Addrating() {
                       value={interval}
                       onChange={(e) => setInterval(e.target.value)}
                       required
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                   <Form.Group md="6" className="mb-2 mt-2 p-2">
@@ -124,12 +126,13 @@ function Addrating() {
                       placeholder="Comment"
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                 </Row>
                 <Row>
                   <Col>
-                    <Button type="submit" className="mb-2" disabled={isLoading}>
+                    <Button type="submit" className="mb-2">
                       Add
                     </Button>
                   </Col>

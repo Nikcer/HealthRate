@@ -15,7 +15,7 @@ function Signup() {
   const [errorMessage, setErrorMessage] = useState("");
   const [empityFields, setEmpityFields] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isFormDisabled, setIsFormDisabled] = useState(false);
+  const [isFormDisabled, setIsFormDisabled] = useState(undefined);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,7 +81,6 @@ function Signup() {
           <Form
             className="d-flex flex-column p-3 gap-2 col-4 mx-auto"
             onSubmit={handleSubmit}
-            disabled={isFormDisabled}
           >
             <Row className="mb-3">
               <Form.Group
@@ -89,32 +88,32 @@ function Signup() {
                 className="p-3"
                 controlId="formGroupUsername"
               >
-                <Form.Label sm={1}></Form.Label>
                 <Form.Control
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Username"
+                  readOnly={isFormDisabled}
                 />
               </Form.Group>
               <Form.Group as={Row} className="p-3">
-                <Form.Label sm={1}></Form.Label>
                 <Form.Control
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email Address"
+                  readOnly={isFormDisabled}
                 />
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Row} className="p-3">
-                <Form.Label sm={1}></Form.Label>
+              <Form.Group>
                 <Form.Control
                   type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  readOnly={isFormDisabled}
                 />
               </Form.Group>
               <Form.Group
@@ -128,6 +127,7 @@ function Signup() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm Password"
+                  readOnly={isFormDisabled}
                 />
               </Form.Group>
             </Row>
@@ -147,7 +147,7 @@ function Signup() {
             )}
             <Button type="submit" disabled={isLoading}>
               Join us
-            </Button>{" "}
+            </Button>
           </Form>
         </div>
       )}

@@ -125,11 +125,7 @@ function Dashboard() {
         <Col md={8} className={styles.searchContainer}>
           <div className="border border-primary-subtle p-2 mb-2 rounded border-3">
             <h3 className="pt-4 ">Search clinic</h3>
-            <Form
-              onSubmit={handleSubmit}
-              disable={isFormDisabled}
-              className="pb-5"
-            >
+            <Form onSubmit={handleSubmit} d className="pb-5">
               <Row className="mb-3">
                 <Form.Group as={Col} md="6" className="pb-3">
                   <Form.Label>Name</Form.Label>
@@ -139,6 +135,7 @@ function Dashboard() {
                     value={query.name}
                     onChange={handleChange}
                     placeholder="Search by Name"
+                    readOnly={isFormDisabled}
                   />
                 </Form.Group>
                 <Form.Group as={Col} md="6" className="pb-3">
@@ -149,6 +146,7 @@ function Dashboard() {
                     onChange={handleChange}
                     type="text"
                     placeholder="Search by City"
+                    readOnly={isFormDisabled}
                   />
                 </Form.Group>
               </Row>
@@ -161,6 +159,7 @@ function Dashboard() {
                     name="district"
                     value={query.district}
                     onChange={handleChange}
+                    readOnly={isFormDisabled}
                   />
                 </Form.Group>
                 <Form.Group as={Col} md="6" className="pb-3">
@@ -171,6 +170,7 @@ function Dashboard() {
                     name="region"
                     value={query.region}
                     onChange={handleChange}
+                    readOnly={isFormDisabled}
                   />
                 </Form.Group>
               </Row>

@@ -10,13 +10,13 @@ import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 
-const ChangeCredentials = (password) => {
+const ChangeCredentials = () => {
   const { auth } = useAuth();
   const { userData } = useUserData();
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [success, setSucces] = useState("");
+
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isFormDisabled, setIsFormDisabled] = useState(false);
@@ -44,12 +44,14 @@ const ChangeCredentials = (password) => {
           },
         }
       );
-      navigate("/userprofile");
+
       console.log("Password updated successfully", response.data);
-      setSucces("Password updated successfully");
+      setIsLoading(false);
+      navigate("/userprofile");
     } catch (err) {
-      console.error("Error", error);
-      setError("Error: ", err);
+      console.error("Error", err);
+      setError("Error");
+      setIsLoading(false);
     }
   };
   return (
@@ -65,11 +67,12 @@ const ChangeCredentials = (password) => {
             character.
           </p>
           {auth.isAuthenticated ? (
-            <Form onSubmit={handleChangePassword} disabled={isFormDisabled}>
+            <Form onSubmit={handleChangePassword}>
               <Form.Group
                 as={Row}
                 className="flex-column p-3"
                 controlId="formHorizontalEmail"
+                readOnly={isFormDisabled}
               >
                 <Form.Label sm={1}></Form.Label>
                 <Col>
@@ -79,10 +82,10 @@ const ChangeCredentials = (password) => {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
+                    readOnly={isFormDisabled}
                   />
                 </Col>
               </Form.Group>
-
               <Form.Group
                 as={Row}
                 className="flex-column p-3"
@@ -96,17 +99,13 @@ const ChangeCredentials = (password) => {
                     onChange={(e) => setConfirmNewPassword(e.target.value)}
                     placeholder="Confirm New Password"
                     required
+                    readOnly={isFormDisabled}
                   />
                 </Col>
               </Form.Group>
 
-              {success ? (
-                <h3 className="text-success">{success}</h3>
-              ) : (
-                <h3 className="text-danger">{error}</h3>
-              )}
-
-              <Button variant="primary" type="submit" disabled={isLoading}>
+              {error && <h3 className="text-danger">{error}</h3>}
+              <Button variant="primary" type="submit">
                 Update
               </Button>
             </Form>

@@ -10,6 +10,7 @@ import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 import styles from "./UpdateUser.module.css";
+
 function UpdateUser() {
   const { auth } = useAuth();
   const { userData } = useUserData();
@@ -51,7 +52,7 @@ function UpdateUser() {
     } catch (err) {
       console.error("Error", err);
       setIsLoading(false);
-      setError("Error: ", err);
+      setError("Error");
     }
   };
 
@@ -63,7 +64,7 @@ function UpdateUser() {
         <div>
           <h2>UPDATE EMAIL</h2>
           {auth.isAuthenticated ? (
-            <Form onSubmit={handleUpdateUser} disabled={isFormDisabled}>
+            <Form onSubmit={handleUpdateUser}>
               <Form.Group
                 as={Row}
                 className="mb-1 p-4"
@@ -77,6 +78,7 @@ function UpdateUser() {
                     onChange={(e) => setNewEmail(e.target.value)}
                     placeholder="New Email"
                     required
+                    readOnly={isFormDisabled}
                   />
                 </Col>
               </Form.Group>
@@ -94,18 +96,14 @@ function UpdateUser() {
                     onChange={(e) => setConfirmNewEmail(e.target.value)}
                     placeholder="Confirm Email"
                     required
+                    readOnly={isFormDisabled}
                   />
                 </Col>
               </Form.Group>
 
               {error && <h3 className="text-danger">{error}</h3>}
 
-              <Button
-                variant="primary"
-                type="submit"
-                className="mb-3"
-                disabled={isLoading}
-              >
+              <Button variant="primary" type="submit" className="mb-3">
                 Update
               </Button>
             </Form>

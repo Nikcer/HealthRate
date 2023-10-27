@@ -90,18 +90,9 @@ function Addclinic() {
           ) : (
             <div>
               <h3>ADD NEW CLINIC</h3>
-              <Form
-                onSubmit={handleAddClinic}
-                disabled={isFormDisabled}
-                className="pt-4"
-              >
+              <Form onSubmit={handleAddClinic} className="pt-4">
                 <Row className="mb-2">
-                  <Form.Group
-                    as={Col}
-                    md="6"
-                    disabled={setIsFormDisabled}
-                    className="pb-4"
-                  >
+                  <Form.Group as={Col} md="6" className="pb-4">
                     <Form.Control
                       type="text"
                       name="name"
@@ -109,6 +100,7 @@ function Addclinic() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md="6" className="pb-4">
@@ -119,6 +111,7 @@ function Addclinic() {
                       type="text"
                       placeholder="Address"
                       required
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                 </Row>
@@ -130,6 +123,7 @@ function Addclinic() {
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                       required
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md="6" className="pb-4">
@@ -139,6 +133,7 @@ function Addclinic() {
                       value={district}
                       onChange={(e) => setDistrict(e.target.value)}
                       required
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                 </Row>
@@ -150,6 +145,7 @@ function Addclinic() {
                       value={region}
                       onChange={(e) => setRegion(e.target.value)}
                       required
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md="6" className="pb-4">
@@ -168,6 +164,7 @@ function Addclinic() {
                       placeholder="Phone number"
                       value={phone_number}
                       onChange={(e) => setPhone_number(e.target.value)}
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md="4" className="pb-4">
@@ -176,6 +173,7 @@ function Addclinic() {
                       placeholder="Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md="4" className="pb-4">
@@ -184,16 +182,13 @@ function Addclinic() {
                       placeholder="website"
                       value={website}
                       onChange={(e) => setWebsite(e.target.value)}
+                      readOnly={isFormDisabled}
                     />
                   </Form.Group>
                 </Row>
                 <Form.Group className="mb-3"></Form.Group>
                 <div>
-                  <Button
-                    type="submit"
-                    disabled={isLoading}
-                    className="p-2 m-3"
-                  >
+                  <Button type="submit" className="p-2 m-3">
                     Add
                   </Button>
 

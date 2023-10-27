@@ -76,7 +76,7 @@ function Profilo() {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="">
+        <div>
           <Col className="pb-1">
             <div xs={2} md={1} className="pt-2 d-grid gap-3  mx-auto">
               <h1>Your Profile</h1>

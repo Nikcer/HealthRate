@@ -1,5 +1,4 @@
 import React from "react";
-
 import axios from "axios";
 import { useState } from "react";
 import { useAuth, useUserData } from "../../context/AuthProvider";
@@ -11,11 +10,9 @@ import Loader from "../../components/Loader/Loader";
 function Login() {
   const { login } = useAuth();
   const { setUserData } = useUserData();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isFormDisabled, setIsFormDisabled] = useState(false);
   const [error, setError] = useState("");
   const [empityFields, setEmpityFields] = useState("");
   const navigate = useNavigate();
@@ -31,7 +28,6 @@ function Login() {
 
     try {
       setIsLoading(true);
-      setIsFormDisabled(true);
 
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/users/login`,
@@ -45,12 +41,12 @@ function Login() {
       login(token);
       const userData = response.data;
       setUserData(userData);
-      setIsLoading(false);
+
       navigate("/dashboard");
     } catch (err) {
       setError("Error: Check the fields.");
       setEmpityFields("");
-      setIsLoading(false);
+      setIsLoading("false");
       console.log("Error:", err);
     }
   };
@@ -63,32 +59,37 @@ function Login() {
         <Form
           onSubmit={handleSubmit}
           className="pt-5 pb-5 d-grid gap-2 col-6 mx-auto"
-          disabled={isFormDisabled}
         >
           <div className="d-md-block">
             <Form.Group className="mb-3">
-              <Form.Label></Form.Label>
-              <Form.Control
+              <input
+                name="Email Address"
+                autoComplete="on"
+                className="form-control"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email Address"
+                readOnly={isLoading}
               />
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Label></Form.Label>
-              <Form.Control
+              <input
+                name="Password"
+                autoComplete="on"
+                className="form-control"
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                readOnly={isLoading}
               />
             </Form.Group>
           </div>
-          <Button variant="primary" type="submit" disabled={isLoading}>
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
             Login
           </Button>
           <div className="container-lg">
