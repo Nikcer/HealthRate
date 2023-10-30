@@ -46,7 +46,7 @@ function Login() {
     } catch (err) {
       setError("Error: Check the fields.");
       setEmptyFields("");
-      setIsLoading("false");
+      setIsLoading(false);
       console.log("Error:", err);
     }
   };
