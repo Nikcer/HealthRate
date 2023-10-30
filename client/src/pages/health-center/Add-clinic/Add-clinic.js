@@ -79,6 +79,7 @@ function Addclinic() {
     setPhone_number(() => "");
     setEmail(() => "");
     setWebsite(() => "");
+    setIsLoading(false);
     setShowForm(true);
   };
   return (

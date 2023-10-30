@@ -79,6 +79,7 @@ function Addrating() {
   }, [resultId]);
 
   const continueAddRating = () => {
+    setIsLoading(false);
     setShowForm(true);
     setTest(() => "");
     setInterval(() => "");
@@ -155,9 +156,9 @@ function Addrating() {
       ) : (
         <div className="pt-5 pb-3">
           {success ? (
-            <h3 className="text-success">{success} </h3>
+            <h3 className="text-success mb-4">{success} </h3>
           ) : (
-            <h3 className="text-danger">{error}</h3>
+            <h3 className="text-danger mb-4">{error}</h3>
           )}
           <Row className="pt-1">
             <Col>

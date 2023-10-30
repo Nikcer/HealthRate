@@ -14,14 +14,14 @@ function Login() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [empityFields, setEmpityFields] = useState("");
+  const [emptyFields, setEmptyFields] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (email === "" || password === "") {
-      setEmpityFields(true);
+      setEmptyFields(true);
       setError("");
       return;
     }
@@ -45,7 +45,7 @@ function Login() {
       navigate("/dashboard");
     } catch (err) {
       setError("Error: Check the fields.");
-      setEmpityFields("");
+      setEmptyFields("");
       setIsLoading("false");
       console.log("Error:", err);
     }
@@ -62,7 +62,7 @@ function Login() {
         >
           <div className="d-md-block">
             <Form.Group className="mb-3">
-              <input
+              <Form.Control
                 name="Email Address"
                 autoComplete="on"
                 className="form-control"
@@ -77,7 +77,7 @@ function Login() {
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <input
+              <Form.Control
                 name="Password"
                 autoComplete="on"
                 className="form-control"
@@ -93,7 +93,7 @@ function Login() {
             Login
           </Button>
           <div className="container-lg">
-            {empityFields && (
+            {emptyFields && (
               <div>
                 <GoAlert />
                 <br />

@@ -25,7 +25,7 @@ function UpdateUser() {
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     if (newEmail !== confirmNewEmail) {
-      setError("Email must match");
+      setError("Emails must match");
       return;
     }
 
@@ -71,7 +71,7 @@ function UpdateUser() {
                 controlId="formHorizontalEmail"
               >
                 <Form.Label column sm={2}></Form.Label>
-                <Col sm={4}>
+                <Col sm={8}>
                   <Form.Control
                     type="email"
                     value={newEmail}
@@ -89,7 +89,7 @@ function UpdateUser() {
                 controlId="formHorizontalPassword"
               >
                 <Form.Label column sm={2}></Form.Label>
-                <Col sm={4} className="p-2">
+                <Col sm={8} className="p-2">
                   <Form.Control
                     type="email"
                     value={confirmNewEmail}

@@ -22,7 +22,7 @@ function Dashboard() {
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isFormDisabled, setIsFormDisabled] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -44,8 +44,6 @@ function Dashboard() {
       return;
     }
     try {
-      setIsFormDisabled(true);
-
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/healthcenter?name=${query.name}&city=${query.city}&district=${query.district}&region=${query.region}`
       );
@@ -125,7 +123,7 @@ function Dashboard() {
         <Col md={8} className={styles.searchContainer}>
           <div className="border border-primary-subtle p-2 mb-2 rounded border-3">
             <h3 className="pt-4 ">Search clinic</h3>
-            <Form onSubmit={handleSubmit} d className="pb-5">
+            <Form onSubmit={handleSubmit} className="pb-5">
               <Row className="mb-3">
                 <Form.Group as={Col} md="6" className="pb-3">
                   <Form.Label>Name</Form.Label>
@@ -135,7 +133,7 @@ function Dashboard() {
                     value={query.name}
                     onChange={handleChange}
                     placeholder="Search by Name"
-                    readOnly={isFormDisabled}
+                    readOnly={isLoading}
                   />
                 </Form.Group>
                 <Form.Group as={Col} md="6" className="pb-3">
@@ -146,7 +144,7 @@ function Dashboard() {
                     onChange={handleChange}
                     type="text"
                     placeholder="Search by City"
-                    readOnly={isFormDisabled}
+                    readOnly={isLoading}
                   />
                 </Form.Group>
               </Row>
@@ -159,7 +157,7 @@ function Dashboard() {
                     name="district"
                     value={query.district}
                     onChange={handleChange}
-                    readOnly={isFormDisabled}
+                    readOnly={isLoading}
                   />
                 </Form.Group>
                 <Form.Group as={Col} md="6" className="pb-3">
@@ -170,7 +168,7 @@ function Dashboard() {
                     name="region"
                     value={query.region}
                     onChange={handleChange}
-                    readOnly={isFormDisabled}
+                    readOnly={isLoading}
                   />
                 </Form.Group>
               </Row>

@@ -15,14 +15,15 @@ function Signup() {
   const [errorMessage, setErrorMessage] = useState("");
   const [empityFields, setEmpityFields] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isFormDisabled, setIsFormDisabled] = useState(undefined);
+  const [isFormDisabled, setIsFormDisabled] = useState(false);
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setErrorMessage(true);
-      setEmpityFields("");
+      setErrorMessage("Passwords do not match");
+      setEmpityFields(false);
       return;
     }
 
@@ -54,7 +55,7 @@ function Signup() {
       console.log("Error", error.response.data);
       if (errorMessage.includes("duplicate key error")) {
         setEmpityFields("");
-        setErrorMessage("Username already exists");
+        setErrorMessage("Username or email already exists");
         return;
       } else if (errorMessage.includes("Email")) {
         setEmpityFields("");
