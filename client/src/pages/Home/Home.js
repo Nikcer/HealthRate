@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Home.module.css";
-import logoOnu from "../asset/img/logoOnu.png";
+import logoOnu from "../../asset/img/logoOnu.png";
 
 const Home = () => {
   return (
-    <section className={styles.home}>
+    <section d="true" className={styles.home}>
       <div>
         <h1>Welcome in HealthRate!</h1>
         <p>
@@ -16,13 +16,18 @@ const Home = () => {
           shortest wait times, and take control of your health.
         </p>
       </div>
-      <div className={styles.targetBox}>
+      <div d="true" className={styles.targetBox}>
         <a
           target="_blank"
           rel="noopener noreferrer"
+          d="true"
           href="https://unric.org/it/obiettivo-3-assicurare-la-salute-e-il-benessere-per-tutti-e-per-tutte-le-eta/"
         >
-          <img src={logoOnu} alt="obbiettivo ONU: Salute e benessere"></img>
+          <img
+            d="true"
+            src={logoOnu}
+            alt="obbiettivo ONU: Salute e benessere"
+          ></img>
         </a>
         <p className={styles.targetText}>
           Inspired by Goal 3 of The Sustainable Development Agenda: Ensure

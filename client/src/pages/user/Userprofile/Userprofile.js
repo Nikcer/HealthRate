@@ -2,13 +2,13 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import styles from "./Userprofile.module.css";
-import { useAuth } from "../../context/AuthProvider";
-import { useUserData } from "../../context/AuthProvider";
+import { useAuth } from "../../../context/AuthProvider";
+import { useUserData } from "../../../context/AuthProvider";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 function Profilo() {
   const { auth, logout } = useAuth();
   const { userData } = useUserData();
@@ -16,6 +16,7 @@ function Profilo() {
   const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(true);
+
   const navigate = useNavigate();
 
   const handleDeleteUser = (e) => {
@@ -75,7 +76,7 @@ function Profilo() {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="">
+        <div>
           <Col className="pb-1">
             <div xs={2} md={1} className="pt-2 d-grid gap-3  mx-auto">
               <h1>Your Profile</h1>
@@ -114,10 +115,12 @@ function Profilo() {
                   )}
                 </div>
               ) : (
-                <p>You must log in to view your user profile.</p>
+                <h3 className="text-danger">
+                  You must log in to view your user profile.
+                </h3>
               )}
               <div>
-                {error && <p className="text-danger">Errore: {error}</p>}
+                {error && <h3 className="text-danger">Error: {error}</h3>}
               </div>
             </div>
           </Col>

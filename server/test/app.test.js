@@ -1,10 +1,10 @@
 const supertest = require("supertest");
 const app = require("../app");
-const connectDB = require("../database"); // Importa correttamente il modulo database
+const connectDB = require("../database");
 
 describe("App", () => {
   before(async () => {
-    await connectDB(); // Chiama correttamente la funzione connectDB
+    await connectDB();
   });
 
   it("Get error 404 route not found", async () => {
