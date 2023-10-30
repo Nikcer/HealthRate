@@ -4,13 +4,11 @@ const healthCenterController = require("../controllers/HealthCenterController");
 const autMiddleware = require("../middlewares/authMiddleware");
 
 router.get("/", healthCenterController.searchHealthCenters);
-
 router.get("/:id", healthCenterController.getHealtCenterData);
 
 router.use(autMiddleware);
 
 router.post("/", healthCenterController.addHealthCenter);
-
 router.patch("/:id", healthCenterController.updateHealthCenter);
 router.delete("/:id", healthCenterController.deleteHealthCenter);
 
