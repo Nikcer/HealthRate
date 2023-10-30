@@ -3,7 +3,7 @@ const checkAuthorization = (req, res, next) => {
   const tokenId = req.user._id;
 
   if (tokenId !== reqUserId) {
-    return res.status(403).json({ error: "Unauthorized user" });
+    return res.status(403).json({ error: "User is not authorized" });
   }
 
   next();
