@@ -49,6 +49,7 @@ function Signup() {
 
       navigate("/login");
     } catch (error) {
+      setIsLoading(false);
       const errorMessage = error.response
         ? error.response.data.error
         : "Unknown error";
