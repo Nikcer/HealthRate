@@ -45,7 +45,7 @@ function Signup() {
           password: password,
         }
       );
-      console.log("Registrazione avvenuta con successo", response);
+      console.log("User registered successfully", response);
 
       navigate("/login");
     } catch (error) {
