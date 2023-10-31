@@ -95,10 +95,15 @@ function Profilo() {
                   {isDeleteConfirmed ? (
                     <div>
                       <p>Are you sure you want to delete the user?</p>
-                      <Button variant="danger" onClick={handleDeleteUser}>
+                      <Button
+                        className="m-4"
+                        variant="danger"
+                        onClick={handleDeleteUser}
+                      >
                         Yes
                       </Button>
                       <Button
+                        className="m-4"
                         variant="secondary"
                         onClick={() => setIsDeleteConfirmed(false)}
                       >
