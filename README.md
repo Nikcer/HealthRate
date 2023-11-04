@@ -22,7 +22,7 @@ of the UN: Ensure healthy lives and promote well-being for all at all ages.
 - Bootstrap
 - React-bootstrap
 - React-icons
-- React-spinners
+
 
 ## Installation 💿
 
